@@ -1,0 +1,3 @@
+﻿  fax2ps.c
+C:\AeroMap\Lib\tiff-4.7.0\tools\fax2ps.c(445,52): warning C4244: 'function': conversion from 'intptr_t' to 'int', possible loss of data
+  fax2ps.vcxproj -> C:\AeroMap\Lib\tiff-4.7.0\tools\Debug\fax2ps.exe

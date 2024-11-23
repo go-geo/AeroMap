@@ -1,0 +1,14 @@
+﻿  defer_strile_loading.c
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(84,64): warning C4244: '=': conversion from 'tmsize_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(95,55): warning C4244: '=': conversion from 'tmsize_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(129,71): warning C4244: '=': conversion from 'tmsize_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(148,70): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(152,71): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(189,62): warning C4244: '=': conversion from 'tmsize_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(207,70): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(211,71): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(243,63): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(247,66): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(255,69): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_loading.c(259,72): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+  defer_strile_loading.vcxproj -> C:\AeroMap\Lib\tiff-4.7.0\test\Debug\defer_strile_loading.exe

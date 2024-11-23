@@ -1,0 +1,9 @@
+﻿  addtiffo.c
+  tif_overview.c
+C:\AeroMap\Lib\tiff-4.7.0\contrib\addtiffo\tif_overview.c(168,19): warning C4244: 'return': conversion from 'toff_t' to 'uint32_t', possible loss of data
+  tif_ovrcache.c
+C:\AeroMap\Lib\tiff-4.7.0\contrib\addtiffo\tif_ovrcache.c(302,47): warning C4244: '=': conversion from 'toff_t' to 'long', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\contrib\addtiffo\tif_ovrcache.c(305,64): warning C4244: '=': conversion from 'toff_t' to 'long', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\contrib\addtiffo\tif_ovrcache.c(332,50): warning C4244: '=': conversion from 'toff_t' to 'int', possible loss of data
+  Generating Code...
+  addtiffo.vcxproj -> C:\AeroMap\Lib\tiff-4.7.0\contrib\addtiffo\Debug\addtiffo.exe

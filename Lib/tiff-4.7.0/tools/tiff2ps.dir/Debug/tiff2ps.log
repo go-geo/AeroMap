@@ -1,0 +1,3 @@
+﻿  tiff2ps.c
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2ps.c(2698,45): warning C4244: 'function': conversion from 'tsize_t' to 'int', possible loss of data
+  tiff2ps.vcxproj -> C:\AeroMap\Lib\tiff-4.7.0\tools\Debug\tiff2ps.exe

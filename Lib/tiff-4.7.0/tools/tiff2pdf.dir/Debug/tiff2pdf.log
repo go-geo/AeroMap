@@ -1,0 +1,18 @@
+﻿  tiff2pdf.c
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(2870,67): warning C4244: '=': conversion from 'tsize_t' to 'tstrip_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6291,57): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6296,57): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6301,57): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6314,61): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6318,61): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6329,61): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6335,65): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6341,69): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6356,65): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6372,65): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6390,69): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6420,69): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6428,65): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6457,65): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiff2pdf.c(6463,33): warning C4244: '=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+  tiff2pdf.vcxproj -> C:\AeroMap\Lib\tiff-4.7.0\tools\Debug\tiff2pdf.exe

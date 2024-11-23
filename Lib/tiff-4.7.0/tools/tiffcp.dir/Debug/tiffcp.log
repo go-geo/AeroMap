@@ -1,0 +1,17 @@
+﻿  tiffcp.c
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1105,52): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1099,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1748,79): warning C4244: 'function': conversion from 'int64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1752,71): warning C4244: 'function': conversion from 'int64_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1713,1): warning C4244: 'initializing': conversion from 'tmsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1714,1): warning C4244: 'initializing': conversion from 'tmsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1765,1): warning C4244: 'initializing': conversion from 'tmsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1766,1): warning C4244: 'initializing': conversion from 'tmsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1945,1): warning C4244: 'initializing': conversion from 'tmsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(1946,1): warning C4244: 'initializing': conversion from 'tmsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(2074,26): warning C4244: '+=': conversion from 'tsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(2001,1): warning C4244: 'initializing': conversion from 'tmsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(2003,1): warning C4244: 'initializing': conversion from 'tmsize_t' to 'uint32_t', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(2004,1): warning C4244: 'initializing': conversion from 'tsize_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\tools\tiffcp.c(2053,1): warning C4244: 'initializing': conversion from 'tsize_t' to 'int', possible loss of data
+  tiffcp.vcxproj -> C:\AeroMap\Lib\tiff-4.7.0\tools\Debug\tiffcp.exe

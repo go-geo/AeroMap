@@ -1,0 +1,6 @@
+﻿  defer_strile_writing.c
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_writing.c(145,64): warning C4244: '=': conversion from 'tmsize_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_writing.c(154,55): warning C4244: '=': conversion from 'tmsize_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_writing.c(181,67): warning C4244: '=': conversion from 'tmsize_t' to 'int', possible loss of data
+C:\AeroMap\Lib\tiff-4.7.0\test\defer_strile_writing.c(204,58): warning C4244: '=': conversion from 'tmsize_t' to 'int', possible loss of data
+  defer_strile_writing.vcxproj -> C:\AeroMap\Lib\tiff-4.7.0\test\Release\defer_strile_writing.exe

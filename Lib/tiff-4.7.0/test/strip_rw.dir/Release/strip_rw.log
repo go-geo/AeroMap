@@ -1,0 +1,7 @@
+﻿  strip_rw.c
+  strip.c
+  test_arrays.c
+C:\AeroMap\Lib\tiff-4.7.0\test\test_arrays.c(217,30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\AeroMap\Lib\tiff-4.7.0\test\test_arrays.c(328,30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Generating Code...
+  strip_rw.vcxproj -> C:\AeroMap\Lib\tiff-4.7.0\test\Release\strip_rw.exe
