@@ -1,0 +1,7 @@
+﻿  DateTime.cpp
+  TestDateTime.cpp
+  Generating Code...
+  TestDateTime.vcxproj -> C:\AeroMap\UnitTests\TestDateTime\x64\Debug\TestDateTime.exe
+  Execute TestDateTime
+  C:\AeroMap\UnitTests\TestDateTime\x64\Debug\TestDateTime
+    ==> There were no test failures

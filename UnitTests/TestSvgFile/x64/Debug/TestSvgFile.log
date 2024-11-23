@@ -1,0 +1,11 @@
+﻿  Calc.cpp
+  Logger.cpp
+  MarkLib.cpp
+  SvgFile.cpp
+  TinyXML2.cpp
+  TestSvgFile.cpp
+  Generating Code...
+  TestSvgFile.vcxproj -> C:\AeroMap\UnitTests\TestSvgFile\x64\Debug\TestSvgFile.exe
+  Execute TestSvgFile
+  C:\AeroMap\UnitTests\TestSvgFile\x64\Debug\TestSvgFile
+    ==> There were no test failures

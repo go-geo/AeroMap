@@ -1,0 +1,21 @@
+﻿  BmpFile.cpp
+  Calc.cpp
+  GLManager.cpp
+  ImageFile.cpp
+  JpegFile.cpp
+  Light.cpp
+  Logger.cpp
+  MarkLib.cpp
+  Material.cpp
+  Model.cpp
+  Model_AC.cpp
+  PngFile.cpp
+  ShaderGL.cpp
+  TextureGL.cpp
+  VertexBufferGL.cpp
+  TestModel_AC.cpp
+  Generating Code...
+  TestModel_AC.vcxproj -> C:\AeroMap\UnitTests\TestModel_AC\x64\Debug\TestModel_AC.exe
+  Execute TestModel_AC
+  C:\AeroMap\UnitTests\TestModel_AC\x64\Debug\TestModel_AC
+    ==> There were no test failures

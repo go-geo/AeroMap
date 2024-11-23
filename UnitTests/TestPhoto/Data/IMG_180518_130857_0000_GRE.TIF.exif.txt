@@ -1,0 +1,118 @@
+     - ExifToolVersion                 : 12.97
+     - FileName                        : IMG_180518_130857_0000_GRE.TIF
+     - Directory                       : .
+     - FileSize                        : 2.5 MB
+     - ZoneIdentifier                  : Exists
+     - FileModifyDate                  : 2024:11:18 09:00:21-08:00
+     - FileAccessDate                  : 2024:11:18 09:35:12-08:00
+     - FileCreateDate                  : 2024:11:18 09:35:12-08:00
+     - FilePermissions                 : -rw-rw-rw-
+     - FileType                        : TIFF
+     - FileTypeExtension               : tif
+     - MIMEType                        : image/tiff
+     - ExifByteOrder                   : Little-endian (Intel, II)
+0x0100 ImageWidth                      : 1280
+0x0101 ImageHeight                     : 960
+0x0102 BitsPerSample                   : 16
+0x0103 Compression                     : Uncompressed
+0x0106 PhotometricInterpretation       : BlackIsZero
+0x010e ImageDescription                : 550 nm
+0x010f Make                            : Parrot
+0x0110 Model                           : Sequoia
+0x0111 StripOffsets                    : 8
+0x0112 Orientation                     : Horizontal (normal)
+0x0115 SamplesPerPixel                 : 1
+0x0117 StripByteCounts                 : 2457600
+0x0118 MinSampleValue                  : 0
+0x011c PlanarConfiguration             : Chunky
+0x0131 Software                        : v1.6.0
+0x0132 ModifyDate                      : 2018:05:18 13:08:57
+     - RigName                         : Sequoia
+     - RigCameraIndex                  : 0
+     - Yaw                             : -145.547256
+     - Pitch                           : 11.779017
+     - Roll                            : -6.244004
+     - BandGain                        : 1.000000
+     - SensorTemperature               : 40.000000
+     - LineReadoutTime                 : 23076
+     - PrincipalPoint                  : 2.470735,1.902431
+     - ModelType                       : fisheye
+     - FisheyeAffineSymmetric          : 1
+     - FisheyeAffineMatrix             : 1663.051912984,0,0,1663.051912984
+     - FisheyePolynomial               : 0,1,0.010026846,-0.14773408
+     - GPSXYAccuracy                   : 1.040861
+     - GPSZAccuracy                    : 0.962000
+     - FlightUUID                      : 94689862BD556DDE0E42ADC1D4ADAA2D
+     - CaptureUUID                     : 0900EB3C0598921532B04A6C40340E0C
+     - SunshineSerialNumber            : PI040379BB7D003303
+     - IrradianceCalibrationMeasurement: 0,600,18,2,1,600,401,48,2,600,6782,872,3,600,65535,21622
+     - CalibrationMeasurement          : 1,0.00584795321637427,520
+     - CalibrationPicture              : 0
+     - IrradianceCalibrationMeasurementGolden: 0,600,14,1.,1,600,345,41.,2,600,5775,671.,3,600,65535,16922.
+     - IrradianceSensitivitiesGolden   : 282.38768,54.2517112
+     - IrradianceUnitScale             : 1.7873713395012918
+     - SensorModel                     : 315426.5301335715,3011.763677194146,5301.223318242922.
+     - BandName                        : Green
+     - CentralWavelength               : 550.000000
+     - WavelengthFWHM                  : 40.000000
+     - BlackCurrent                    : 76.000000
+     - VignettingPolynomial2DName      : 0,0,1,0,2,0,3,0,4,0,0,1,0,2,0,3,0,4,1,1,1,2,1,3,2,1,2,2,3,1
+     - VignettingPolynomial2D          : 0.6798484445209714,1.1394908461857798,-2.0519897548522925,1.8962000545662352,-0.9221167213062109,0.4753641688409045,-0.4687173378237914,0.0236726999677674,-0.0227808476004627,-0.8254325182848814,0.6963488728382667,0.0548589470952398,0.8700165142667475,-0.7816781922479672,-0.0086936270920346
+     - InvalidPixel                    : 601,120,153,675
+     - IrradianceList                  : .zTR0DgAAAADvBHcAAQBkAIBTxMGEPm9AKW2gwF0+dw4AAAAA6AR3AAEAZAATkMfB8t9PQJno0sC2UHoOAAAAANoEdQABAGQAcUXRwaJmvkBm+tzAEVl9DgAAAADZBHUAAQBkAJin4sFc0QdB4tW+wHJsgA4AAAAA0AR1AAEAZADm5OzBhiDeQG4WmcDSdYMOAAAAAMsEdQABAGQARP/mwbCX6kCHnXPAmICGDgAAAADQBHUAAQBkAPNQ3cHOCRxBVJU6vzGSiQ4AAAAA0gR1AAEAZAB1fNHBSqwtQSLVLL99l4wOAAAAAOMEdgABAGQA2eTNwRB+MkH1RwA+GqqPDgAAAADwBHcAAQBkABzd4cF4GEdBMcSiPiSrkg4AAAAAAAV5AAEAZABHFwTCEB4/QdBmRUD0tpUOAAAAAAcFeQABAGQAYxMcwpjEJ0HrzWtA8sSYDgAAAAANBXkAAQBkAJ/KKsIiiCVBNeiNQMfSmw4AAAAAKAV8AAEAZABpDDfCtS0JQSIjAEFG4p4OAAAAACQFewABAGQAR+1EwobtCEGVj6BAKOyhDgAAAAAvBX0AAQBkANMJUMIllfpA9BBtQBH4pA4AAAAAJQV8AAEAZAABYlfCpuQNQaa8B8ANDKgOAAAAAC4FfAABAGQARH1ZwiXMAEE2Us3AzherDgAAAAArBXwAAQBkABN9WsJxwh9BraQ6wHomrg4AAAAAIgV7AAEAZAClLmXCE6b4QPNKj8BCM7EOAAAAACcFfAABAGQAIAp3wndCK0HkWufA5ka0DgAAAAARBXoAAQBkAIpHhMITib5AFi/FwBxatw4AAAAADQV5AAEAZABqsIvCzb0ZQWZo6cB/ZLoOAAAAAAMFeQABAGQAgt+Qwkgvj0CYyBLBHna9DgAAAAAMBXoAAQBkAGoHkMKn3/tAtkw7wcl+wA4AAAAAHwV7AAEAZAB+p43CziGcQKtM0L+WjcMOAAAAACEFewABAGQAdjeWwiWTokAtrkrBuJnGDgAAAAAVBXoAAQBkAHICocKL8N9ACck+wbCnyQ4AAAAA9gR4AAEAZACkiq3CJCEIQZBvOcGktswOAAAAAOgEdwABAGQAJ3q2wtUyH0EHr0rBM8PPDgAAAAC/BHIAAQBkAJ+MvcJdXUJBeSMxwdjQ0g4AAAAAqwRxAAEAZACQAMXCSjI6QZafDsG+3NUOAAAAAJ4EcAABAGQA+k3VwndJTUGHhj3Bk+bYDgAAAACIBG4AAQBkAKPh7MJH7zBBhIVPwfL92w4AAAAASwRpAAEAZADbNgbDV/VKQaJiWMG5At8OAAAAAAUEYwABAGQATOwVw6p/h0HRzGjBVhHiDgAAAAC5A10AAQBkAOl7IcMHSa9BBSFDwVse5Q4AAAAAygNfAAEAZAAQOC3DRLW3QQylz8DDLOgOAAAAAN4DYAABAGQAKhQxQwS9qkHQJpu/lEDrDgAAAABgBGwAAQBkACPBKENX+GRBVKFIQcVE7g4AAAAA/wR4AAEAZABJQCFDoFsPQfQ/nUH+UvEOAAAAAEQFfgABAGQALwMfQ1U2ukA/NKRBf2T0DgAAAABTBYAAAQBkAMEaIkMu61M/jUFlQVlu9w4AAAAATgV/AAEAZADGDypDmaI0QJXf/0Dzf/oOAAAAADwFfQABAGQA+cwwQ9yf0kC68DY+a3j9DgAAAAA2BX0AAQBkAHA1M0OZe6tAtGaYwBOGAA8AAAAAQwV+AAEAZAB+5jND5xI4QCy0qcCalAMPAAAAAEgFfgABAGQArUIzw4yUGEAHmerAY6EGDwAAAABKBX8AAQBkAMOPL8NTkqg/EjM1wZGzCQ8AAAAATAV/AAEAZACMvSvDnY5Bv9S25cAauwwPAAAAAEwFfwABAGQAT2kpw+K6GsB+udDA.
+0x829a ExposureTime                    : 1/1032
+0x829d FNumber                         : 2.2
+0x8824 SpectralSensitivity             : 550 nm
+0x8827 ISO                             : 100
+0x9003 DateTimeOriginal                : 2018:05:18 13:08:57
+0x9004 CreateDate                      : 1970:01:01 00:04:12
+0x9201 ShutterSpeedValue               : 1/1032
+0x9202 ApertureValue                   : 2.2
+0x9205 MaxApertureValue                : 2.2
+0x920a FocalLength                     : 4.0 mm
+0x9211 ImageNumber                     : 0
+0x927c MakerNoteUnknownText            : 0.2
+0x9290 SubSecTime                      : 481259
+0x9291 SubSecTimeOriginal              : 481259
+0x9292 SubSecTimeDigitized             : 603490
+0xa002 ExifImageWidth                  : 1280
+0xa003 ExifImageHeight                 : 960
+0xa20e FocalPlaneXResolution           : 266.6666559
+0xa20f FocalPlaneYResolution           : 266.6666559
+0xa210 FocalPlaneResolutionUnit        : mm
+0xa402 ExposureMode                    : Auto
+0xa405 FocalLengthIn35mmFormat         : 30 mm
+0xa420 ImageUniqueID                   : BCF9A4278D7C40D40FB7AF9BA667C8C2
+0xa431 SerialNumber                    : PI040378AD7D003111
+0x0000 GPSVersionID                    : 2.2.0.0
+0x0001 GPSLatitudeRef                  : North
+0x0003 GPSLongitudeRef                 : East
+0x0005 GPSAltitudeRef                  : Above Sea Level
+0x0007 GPSTimeStamp                    : 13:08:55.428002
+0x0009 GPSStatus                       : Measurement Active
+0x000c GPSSpeedRef                     : km/h
+0x000d GPSSpeed                        : 43.36712488
+0x0012 GPSMapDatum                     : WGS-84
+0x001d GPSDateStamp                    : 2018:05:18
+0xc619 BlackLevelRepeatDim             : 2 2
+0xc61a BlackLevel                      : 5016 5028 5035 5027
+0xc62f CameraSerialNumber              : PI040378AD7D003111
+0xc68b OriginalRawFileName             : IMG_180518_130857_0000_GRE.TIF
+     - Aperture                        : 2.2
+     - ImageSize                       : 1280x960
+     - Megapixels                      : 1.2
+     - ScaleFactor35efl                : 7.5
+     - ShutterSpeed                    : 1/1032
+     - SubSecCreateDate                : 1970:01:01 00:04:12.603490
+     - SubSecDateTimeOriginal          : 2018:05:18 13:08:57.481259
+     - SubSecModifyDate                : 2018:05:18 13:08:57.481259
+     - GPSAltitude                     : 130.5 m Above Sea Level
+     - GPSDateTime                     : 2018:05:18 13:08:55.42800156Z
+     - GPSLatitude                     : 54 deg 10' 45.21" N
+     - GPSLongitude                    : 12 deg 18' 41.55" E
+     - CircleOfConfusion               : 0.004 mm
+     - FOV                             : 61.9 deg
+     - FocalLength35efl                : 4.0 mm (35 mm equivalent: 30.0 mm)
+     - GPSPosition                     : 54 deg 10' 45.21" N, 12 deg 18' 41.55" E
+     - HyperfocalDistance              : 1.81 m
+     - LightValue                      : 12.3

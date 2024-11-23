@@ -1,0 +1,6 @@
+﻿  TestXString.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 313 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  TestXString.vcxproj -> C:\AeroMap\UnitTests\TestXString\x64\Release\TestXString.exe

@@ -1,0 +1,13 @@
+﻿  Logger.cpp
+  TestLibTiff.cpp
+  Generating Code...
+  TestTiffLib.vcxproj -> C:\AeroMap\UnitTests\TestLibTiff\x64\Debug\TestLibTiff.exe
+  Execute TestLibTiff
+  TIFFReadDirectory: Warning, Unknown field with tag 512 (0x200) encountered.
+  TIFFReadDirectory: Warning, Unknown field with tag 519 (0x207) encountered.
+  TIFFReadDirectory: Warning, Unknown field with tag 520 (0x208) encountered.
+  TIFFReadDirectory: Warning, Unknown field with tag 521 (0x209) encountered.
+  C:/AeroMap/UnitTests/TestLibTiff/Data/zackthecat.tif: Old-style JPEG compression support is not configured.
+  TIFFReadDirectory: Warning, Unknown field with tag 50341 (0xc4a5) encountered.
+  C:\AeroMap\UnitTests\TestLibTiff\x64\Debug\TestLibTiff
+    ==> There were no test failures

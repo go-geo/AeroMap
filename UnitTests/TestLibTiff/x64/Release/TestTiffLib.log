@@ -1,0 +1,7 @@
+﻿  Logger.cpp
+  TestLibTiff.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 131 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  TestTiffLib.vcxproj -> C:\AeroMap\UnitTests\TestLibTiff\x64\Release\TestLibTiff.exe

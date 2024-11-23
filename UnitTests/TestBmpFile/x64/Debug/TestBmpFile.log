@@ -1,0 +1,8 @@
+﻿  BmpFile.cpp
+  Logger.cpp
+  TestBmpFile.cpp
+  Generating Code...
+  TestBmpFile.vcxproj -> C:\AeroMap\UnitTests\TestBmpFile\x64\Debug\TestBmpFile.exe
+  Execute TestBmpFile
+  C:\AeroMap\UnitTests\TestBmpFile\x64\Debug\TestBmpFile
+    ==> There were no test failures

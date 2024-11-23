@@ -1,0 +1,8 @@
+﻿  Logger.cpp
+  TextFile.cpp
+  TestPdal.cpp
+  Generating Code...
+  TestPdal.vcxproj -> C:\AeroMap\UnitTests\TestPdal\x64\Debug\TestPdal.exe
+  Execute TestPdal
+  C:\AeroMap\UnitTests\TestPdal\x64\Debug\TestPdal
+    ==> There were no test failures

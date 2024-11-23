@@ -1,0 +1,9 @@
+﻿  Photo.cpp
+  TestPhoto.cpp
+  Generating Code...
+  TestPhoto.vcxproj -> C:\AeroMap\UnitTests\TestPhoto\x64\Debug\TestPhoto.exe
+  Execute TestPhoto
+  TIFFReadCustomDirectory: Warning, Unknown field with tag 37393 (0x9211) encountered.
+  TIFFReadCustomDirectory: Warning, Wrong data type 2 for "MakerNote"; tag ignored.
+  C:\AeroMap\UnitTests\TestPhoto\x64\Debug\TestPhoto
+    ==> There were no test failures

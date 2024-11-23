@@ -1,0 +1,7 @@
+﻿  Calc.cpp
+  TestCalc.cpp
+  Generating Code...
+  TestCalc.vcxproj -> C:\AeroMap\UnitTests\TestCalc\x64\Debug\TestCalc.exe
+  Execute TestCalc
+  C:\AeroMap\UnitTests\TestCalc\x64\Debug\TestCalc
+    ==> There were no test failures

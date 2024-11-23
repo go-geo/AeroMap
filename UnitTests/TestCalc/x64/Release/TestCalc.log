@@ -1,0 +1,7 @@
+﻿  Calc.cpp
+  TestCalc.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 450 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  TestCalc.vcxproj -> C:\AeroMap\UnitTests\TestCalc\x64\Release\TestCalc.exe

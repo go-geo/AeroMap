@@ -1,0 +1,8 @@
+﻿  Calc.cpp
+  Camera.cpp
+  TestCamera.cpp
+  Generating Code...
+  TestCamera.vcxproj -> C:\AeroMap\UnitTests\TestCamera\x64\Debug\TestCamera.exe
+  Execute TestCamera
+  C:\AeroMap\UnitTests\TestCamera\x64\Debug\TestCamera
+    ==> There were no test failures

@@ -1,0 +1,13 @@
+﻿  Photo.cpp
+C:\AeroMap\AeroMap\Photo.cpp(1188,54): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\AeroMap\AeroMap\Photo.cpp(1188,46): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\AeroMap\AeroMap\Photo.cpp(1188,36): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\AeroMap\AeroMap\Photo.cpp(1197,43): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+  exif.cpp
+  Logger.cpp
+  TestPhoto.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 460 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  TestPhoto.vcxproj -> C:\AeroMap\UnitTests\TestPhoto\x64\Release\TestPhoto.exe

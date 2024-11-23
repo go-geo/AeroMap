@@ -1,0 +1,8 @@
+﻿  Calc.cpp
+  Camera.cpp
+  TestCamera.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 135 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  TestCamera.vcxproj -> C:\AeroMap\UnitTests\TestCamera\x64\Release\TestCamera.exe
