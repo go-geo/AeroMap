@@ -19,6 +19,8 @@ private:
 	QPainter* mp_Painter;
 
 	int m_dpi;
+	int m_marginl;
+	int m_marginr;
 
 	XString m_collect_date;
 	XString m_process_date;

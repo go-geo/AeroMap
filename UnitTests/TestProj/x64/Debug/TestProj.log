@@ -1,10 +1,4 @@
-﻿  Calc.cpp
-  Logger.cpp
-  Gis.cpp
-  TestProj.cpp
-  Generating Code...
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  TestProj.vcxproj -> C:\AeroMap\UnitTests\TestProj\x64\Debug\TestProj.exe
+﻿  TestProj.vcxproj -> C:\AeroMap\UnitTests\TestProj\x64\Debug\TestProj.exe
   Execute TestProj
   proj_create: unrecognized format / unknown name
   proj_create_from_wkt: missing [

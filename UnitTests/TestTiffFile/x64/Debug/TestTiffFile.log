@@ -1,8 +1,4 @@
-﻿  TiffFile.cpp
-  Logger.cpp
-  TestTiffFile.cpp
-  Generating Code...
-  TestTiffFile.vcxproj -> C:\AeroMap\UnitTests\TestTiffFile\x64\Debug\TestTiffFile.exe
+﻿  TestTiffFile.vcxproj -> C:\AeroMap\UnitTests\TestTiffFile\x64\Debug\TestTiffFile.exe
   Execute TestTiffFile
   LZWPreDecode: Warning, Old-style LZW codes, convert file.
   C:\AeroMap\UnitTests\TestTiffFile\x64\Debug\TestTiffFile

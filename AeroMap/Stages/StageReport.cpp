@@ -10,7 +10,9 @@ using json = nlohmann::json;
 
 #include "StageReport.h"
 
-const int OFFSETV = 240;		// default line spacing
+const int OFFSETV = 240;					// default line spacing
+const QColor TABLE_COLOR(218, 222, 228);	// table fill color
+const int TABLE_MARGIN = 100;
 
 int StageReport::Run()
 {
@@ -39,6 +41,8 @@ int StageReport::Run()
 	mp_Writer->setPageSize(QPageSize(QPageSize::Letter));
 	mp_Writer->setPageOrientation(QPageLayout::Portrait);
 	m_dpi = mp_Writer->resolution();
+	m_marginl = m_dpi / 2;
+	m_marginr = 0;
 
 	mp_Painter = new QPainter(mp_Writer);
 
@@ -65,23 +69,50 @@ void StageReport::OutputSummary()
 	OutputHeader(false);
 
 	mp_Painter->setFont(m_FontHeader1);
-	mp_Painter->drawText(800, 1000, "Summary");
+	mp_Painter->drawText(m_marginl, 1000, "Summary");
 
 	mp_Painter->setFont(m_FontBody);
 	int y = 1400;
-	OutputText(1600, y += OFFSETV, "Date Processed: %s", m_process_date.c_str());
-	OutputText(1600, y += OFFSETV, "Date Collected: %s", m_collect_date.c_str());
-	OutputText(1600, y += OFFSETV, "Area Covered: %0.7f sq km", m_area * 1E-6);
-	OutputText(1600, y += OFFSETV, "Number of Images: %d", GetProject().GetImageCount());
 
+	// lines in table
+	int line_count = 5;
+
+	QRectF rectTable(m_marginl, y, m_dpi * 6, OFFSETV * line_count);
+	QRectF rectLabel = rectTable;
+	rectLabel.setWidth(rectTable.width() / 2);
+	mp_Painter->fillRect(rectLabel, TABLE_COLOR);
+	QPen pen(TABLE_COLOR, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+	mp_Painter->setPen(pen);
+	mp_Painter->drawRect(rectTable);
+	for (int i = 1; i < line_count; ++i)
+	{
+		int line_y = rectTable.top() + OFFSETV * i;
+		mp_Painter->drawLine(rectTable.left(), line_y, rectTable.right(), line_y);
+	}
+	mp_Painter->setPen(QColor(0, 0, 0));
+
+	const int COL1 = rectTable.left() + TABLE_MARGIN;
+	const int COL2 = rectLabel.right() + TABLE_MARGIN;
+	y = rectTable.top();
+	y += 180;
+	OutputText(COL1, y, "Date Processed:"); OutputText(COL2, y, "%s", m_process_date.c_str()); y += OFFSETV;
+	OutputText(COL1, y, "Date Collected:"); OutputText(COL2, y, "%s", m_collect_date.c_str()); y += OFFSETV;
+	OutputText(COL1, y, "Area Covered:");   OutputText(COL2, y, "%0.7f sq km", m_area * 1E-6); y += OFFSETV;
+	OutputText(COL1, y, "Images:");         OutputText(COL2, y, "%d", GetProject().GetImageCount()); y += OFFSETV;
+
+	OutputText(COL1, y, "Location:");
 	AeroLib::Georef georef = AeroLib::ReadGeoref();
 	if (georef.is_valid)
 	{
 		double lat, lon;
 		GIS::XYToLatLon_UTM(georef.utm_zone, georef.hemi, georef.x, georef.y, lat, lon, GIS::Ellipsoid::WGS_84);
-
-		OutputText(1600, y += OFFSETV, "Location: %0.3f %c %0.3f %c", lat, lat >= 0.0 ? 'N' : 'S', lon, lon >= 0.0 ? 'E' : 'W');
+		OutputText(COL2, y, "%0.3f %c %0.3f %c", lat, lat >= 0.0 ? 'N' : 'S', lon, lon >= 0.0 ? 'E' : 'W');
 	}
+	else
+	{
+		OutputText(COL2, y, "---");
+	}
+	y += OFFSETV;
 }
 
 void StageReport::OutputOpenSFM()
@@ -89,7 +120,7 @@ void StageReport::OutputOpenSFM()
 	OutputHeader();
 
 	mp_Painter->setFont(m_FontHeader1);
-	mp_Painter->drawText(800, 1000, "OpenSFM");
+	mp_Painter->drawText(m_marginl, 1000, "OpenSFM");
 
 	// top view
 	{
@@ -148,7 +179,7 @@ void StageReport::OutputOrthophoto()
 	OutputHeader();
 
 	mp_Painter->setFont(m_FontHeader1);
-	mp_Painter->drawText(800, 1000, "Orthophoto");
+	mp_Painter->drawText(m_marginl, 1000, "Orthophoto");
 
 	// desired size of image, inches
 	const double WIDTH_IN = 6.5;
@@ -164,14 +195,37 @@ void StageReport::OutputParameters()
 	OutputHeader();
 
 	mp_Painter->setFont(m_FontHeader1);
-	mp_Painter->drawText(800, 1000, "Parameters");
+	mp_Painter->drawText(m_marginl, 1000, "Parameters");
 
 	mp_Painter->setFont(m_FontBody);
 	int y = 1400;
-	OutputText(1600, y += OFFSETV, "DEM Resolution: %0.1f", arg.dem_resolution);
-	OutputText(1600, y += OFFSETV, "Orthophoto Resolution: %0.1f", arg.ortho_resolution);
-	OutputText(1600, y += OFFSETV, "DSM: %s", arg.dsm ? "True" : "False");
-	OutputText(1600, y += OFFSETV, "DTM: %s", arg.dtm ? "True" : "False");
+
+	int line_count = 5;
+
+	QRectF rectTable(m_marginl, y, m_dpi * 6, OFFSETV * line_count);
+	QRectF rectLabel = rectTable;
+	rectLabel.setWidth(rectTable.width() / 2);
+	mp_Painter->fillRect(rectLabel, TABLE_COLOR);
+	QPen pen(TABLE_COLOR, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+	mp_Painter->setPen(pen);
+	mp_Painter->drawRect(rectTable);
+	for (int i = 1; i < line_count; ++i)
+	{
+		int line_y = rectTable.top() + OFFSETV * i;
+		mp_Painter->drawLine(rectTable.left(), line_y, rectTable.right(), line_y);
+	}
+	mp_Painter->setPen(QColor(0, 0, 0));
+
+	const int COL1 = rectTable.left() + TABLE_MARGIN;
+	const int COL2 = rectLabel.right() + TABLE_MARGIN;
+	y = rectTable.top();
+	y += 180;
+
+	OutputText(COL1, y, "DEM Resolution:"); OutputText(COL2, y, "%0.1f", arg.dem_resolution); y += OFFSETV;
+	OutputText(COL1, y, "Orthophoto Resolution:"); OutputText(COL2, y, "%0.1f", arg.ortho_resolution); y += OFFSETV;
+	OutputText(COL1, y, "DSM:"); OutputText(COL2, y, "%s", arg.dsm ? "True" : "False"); y += OFFSETV;
+	OutputText(COL1, y, "DTM:"); OutputText(COL2, y, "%s", arg.dtm ? "True" : "False"); y += OFFSETV;
+	OutputText(COL1, y, "Fast Orthophoto:"); OutputText(COL2, y, "%s", arg.fast_orthophoto ? "True" : "False"); y += OFFSETV;
 }
 
 void StageReport::OutputHeader(bool new_page)
@@ -180,7 +234,7 @@ void StageReport::OutputHeader(bool new_page)
 		mp_Writer->newPage();
 
 	mp_Painter->setFont(m_FontHeader);
-	mp_Painter->drawText(400, 400, "AeroMap Report");
+	mp_Painter->drawText(m_marginl, 400, "AeroMap Report");
 }
 
 void StageReport::SetupFonts()
@@ -196,7 +250,7 @@ void StageReport::SetupFonts()
 	m_FontHeader1.setItalic(false);
 
 	m_FontBody.setFamily("Consolas");
-	m_FontBody.setPointSize(10.0);
+	m_FontBody.setPointSize(9.0);
 	m_FontBody.setBold(false);
 	m_FontBody.setItalic(false);
 }

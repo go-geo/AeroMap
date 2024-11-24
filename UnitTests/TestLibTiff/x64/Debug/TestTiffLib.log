@@ -1,7 +1,4 @@
-﻿  Logger.cpp
-  TestLibTiff.cpp
-  Generating Code...
-  TestTiffLib.vcxproj -> C:\AeroMap\UnitTests\TestLibTiff\x64\Debug\TestLibTiff.exe
+﻿  TestTiffLib.vcxproj -> C:\AeroMap\UnitTests\TestLibTiff\x64\Debug\TestLibTiff.exe
   Execute TestLibTiff
   TIFFReadDirectory: Warning, Unknown field with tag 512 (0x200) encountered.
   TIFFReadDirectory: Warning, Unknown field with tag 519 (0x207) encountered.

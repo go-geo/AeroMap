@@ -13,6 +13,7 @@
 		
 AeroMap.tlog/
 AeroMap/x64/
+AeroMap/Data/AeroMap.log
 
 Lib/CppUnitLite/x64/
 Lib/gdal-3.2.1/x64/
@@ -36,6 +37,10 @@ gdal.lib
 pdal.lib
 proj.lib
 proj_d.lib
+
+UnitTests/TestLibTiff/x64/
+UnitTests/TestPhoto/x64/
+UnitTests/TestTiffFile/x64/
 
 # Prerequisites
 *.d

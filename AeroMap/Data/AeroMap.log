@@ -1,87 +1,53 @@
-2024-11-23 13:50:05: Log file 'C:/AeroMap/AeroMap/Data/AeroMap.log' created.
-2024-11-23 13:50:05: Loading C:/AeroMap/AeroMap/Data/test.aero ...
-2024-11-23 13:50:05: C:/AeroMap/AeroMap/Data/test.aero loaded
-2024-11-23 13:50:05: DroneWindow::initializeGL - Using GLEW: 2.2.0
-2024-11-23 13:50:05: GLManager::Initialize - 
-2024-11-23 13:50:05: DroneWindow::initializeGL - GLU_VERSION: 1.2.2.0 Microsoft Corporation
-2024-11-23 13:50:05: DroneWindow::initializeGL - GLU_EXTENSIONS: GL_EXT_bgra
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_ATTRIB_STACK_DEPTH: 16
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_CLIENT_ATTRIB_STACK_DEPTH: 16
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_CLIP_PLANES: 8
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_EVAL_ORDER: 8
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_LIGHTS: 8
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_MODELVIEW_STACK_DEPTH: 32
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_NAME_STACK_DEPTH: 128
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_PIXEL_MAP_TABLE: 65536
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_PROJECTION_STACK_DEPTH: 4
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_TEXTURE_SIZE: 16384
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_TEXTURE_STACK_DEPTH: 10
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL_MAX_VIEWPORT_DIMS: 16384x16384
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL Vendor    : NVIDIA Corporation
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL Renderer  : NVIDIA GeForce GTX 745/PCIe/SSE2
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL Version   : 4.6.0 NVIDIA 560.94
-2024-11-23 13:50:05: DroneWindow::initializeGL - GL Version   : 4.6
-2024-11-23 13:50:05: DroneWindow::initializeGL - GLSL Version : 4.60 NVIDIA
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms - ------------------------------------------------
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms -  Shader: SS
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms -  Location | Name
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms - ------------------------------------------------
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms -  0        | ProjectionMatrix
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs - ------------------------------------------------
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs -  Shader: SS
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs -  Index | Name
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs - ------------------------------------------------
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs -  1     | VertexColor
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs -  0     | VertexPosition
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms - ------------------------------------------------
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms -  Shader: Image
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms -  Location | Name
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms - ------------------------------------------------
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms -  0        | ProjectionMatrix
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms -  1        | xoff
-2024-11-23 13:50:05: ShaderGL::PrintActiveUniforms -  2        | yoff
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs - ------------------------------------------------
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs -  Shader: Image
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs -  Index | Name
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs - ------------------------------------------------
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs -  1     | VertexColor
-2024-11-23 13:50:05: ShaderGL::PrintActiveAttribs -  0     | VertexPosition
-2024-11-23 13:50:12: Loading images...
-2024-11-23 13:50:31: Load dataset...
-2024-11-23 13:50:31: OpenSFM...
-2024-11-23 13:50:31: OpenSFM: Detect features...
-2024-11-23 13:51:32: OpenSFM: Match features...
-2024-11-23 13:52:09: OpenSFM: Create tracks...
-2024-11-23 13:52:15: OpenSFM: Reconstruct...
-2024-11-23 13:54:10: OpenSFM: Compute statistics...
-2024-11-23 13:54:29: OpenSFM: Export geocoords...
-2024-11-23 13:54:40: Undistorted max image size: 4000
-2024-11-23 13:54:40: Updating 'D:/test_aero/opensfm/config.yaml'...
-2024-11-23 13:54:40: OpenSFM: Undistort...
-2024-11-23 13:55:14: OpenSFM: Export visualsfm...
-2024-11-23 13:55:41: OpenSFM: Export ply...
-2024-11-23 13:55:59: OpenSFM: Export ply...
-2024-11-23 13:56:49: Filter points...
-2024-11-23 13:56:49: PointCloud::filter - Filtering 'D:/test_aero/opensfm/reconstruction.ply' (statistical, meanK 16, standard deviation 2.5)
-2024-11-23 13:56:50: Mesh...
-2024-11-23 13:56:51: Mesh::screened_poisson_reconstruction - PoissonRecon failed with 7 threads, retrying with 3...
-2024-11-23 13:56:51: Mesh::screened_poisson_reconstruction - PoissonRecon failed with 3 threads, retrying with 1...
-2024-11-23 13:56:51: Mesh::screened_poisson_reconstruction - PoissonRecon failed with 1 threads, retrying with 0...
-2024-11-23 13:56:51: StageMesh::CreateMesh25D - Writing 2.5D mesh file: 'D:/test_aero/odm_meshing/odm_25dmesh.ply'
-2024-11-23 13:56:51: StageMesh::CreateMesh25D - 2.5D DSM resolution: 0.33
-2024-11-23 13:56:51: Mesh::create_25dmesh - Creating DSM for 2.5D mesh
-2024-11-23 13:56:52: DEM::create_dem - Point cloud bounds are [minx: -391.122, maxx: 340.914] [miny: -316.034, maxy: 283.711]
-2024-11-23 13:56:52: DEM::create_dem - DEM resolution is 278x228, max tile size is 4096, will split DEM generation into 1 tiles
-2024-11-23 13:56:52: Processing tile 1/3...
-2024-11-23 13:56:52: Processing tile 2/3...
-2024-11-23 13:56:52: Processing tile 3/3...
-2024-11-23 13:57:03: Texture...
-2024-11-23 13:57:03: Writing MVS textured file: 'D:/test_aero/odm_texturing/odm_textured_model_geo.obj'
-2024-11-23 13:57:13: Writing MVS textured file: 'D:/test_aero/odm_texturing_25d/odm_textured_model_geo.obj'
-2024-11-23 13:58:06: Georeference...
-2024-11-23 13:58:06: DEM...
-2024-11-23 13:58:13: StageDEM::Run - DEM will not be generated
-2024-11-23 13:58:13: Orthophoto...
-2024-11-23 13:58:31: Report...
-2024-11-23 13:58:35: Drone image processing complete.
-2024-11-23 13:58:41: GLManager::Shutdown - 
+2024-11-24 09:25:18: Log file 'C:/AeroMap/AeroMap/Data/AeroMap.log' created.
+2024-11-24 09:25:18: Loading C:/AeroMap/AeroMap/Data/test.aero ...
+2024-11-24 09:25:18: C:/AeroMap/AeroMap/Data/test.aero loaded
+2024-11-24 09:25:18: DroneWindow::initializeGL - Using GLEW: 2.2.0
+2024-11-24 09:25:18: GLManager::Initialize - 
+2024-11-24 09:25:18: DroneWindow::initializeGL - GLU_VERSION: 1.2.2.0 Microsoft Corporation
+2024-11-24 09:25:18: DroneWindow::initializeGL - GLU_EXTENSIONS: GL_EXT_bgra
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_ATTRIB_STACK_DEPTH: 16
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_CLIENT_ATTRIB_STACK_DEPTH: 16
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_CLIP_PLANES: 8
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_EVAL_ORDER: 8
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_LIGHTS: 8
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_MODELVIEW_STACK_DEPTH: 32
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_NAME_STACK_DEPTH: 128
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_PIXEL_MAP_TABLE: 65536
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_PROJECTION_STACK_DEPTH: 4
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_TEXTURE_SIZE: 16384
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_TEXTURE_STACK_DEPTH: 10
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL_MAX_VIEWPORT_DIMS: 16384x16384
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL Vendor    : NVIDIA Corporation
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL Renderer  : NVIDIA GeForce GTX 745/PCIe/SSE2
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL Version   : 4.6.0 NVIDIA 560.94
+2024-11-24 09:25:18: DroneWindow::initializeGL - GL Version   : 4.6
+2024-11-24 09:25:18: DroneWindow::initializeGL - GLSL Version : 4.60 NVIDIA
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms - ------------------------------------------------
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms -  Shader: SS
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms -  Location | Name
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms - ------------------------------------------------
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms -  0        | ProjectionMatrix
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs - ------------------------------------------------
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs -  Shader: SS
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs -  Index | Name
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs - ------------------------------------------------
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs -  1     | VertexColor
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs -  0     | VertexPosition
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms - ------------------------------------------------
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms -  Shader: Image
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms -  Location | Name
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms - ------------------------------------------------
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms -  0        | ProjectionMatrix
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms -  1        | xoff
+2024-11-24 09:25:18: ShaderGL::PrintActiveUniforms -  2        | yoff
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs - ------------------------------------------------
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs -  Shader: Image
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs -  Index | Name
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs - ------------------------------------------------
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs -  1     | VertexColor
+2024-11-24 09:25:18: ShaderGL::PrintActiveAttribs -  0     | VertexPosition
+2024-11-24 09:25:25: Loading images...
+2024-11-24 09:25:29: Load images canceled.
+2024-11-24 09:25:36: Loading images...
+2024-11-24 09:25:43: Load images canceled.
+2024-11-24 09:25:46: GLManager::Shutdown - 

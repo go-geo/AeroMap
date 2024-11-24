@@ -16,6 +16,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+#include <QProgressDialog>
+
 #include "AeroMap.h"
 #include "AeroLib.h"
 #include "TextFile.h"		// manage small text files
@@ -215,8 +217,14 @@ int Project::LoadImageList()
 	dir.setFilter(QDir::Files | QDir::NoSymLinks | QDir::NoDotAndDotDot);
 
 	QFileInfoList list = dir.entryInfoList();
+
+	QProgressDialog progress(QString("Loading images..."), QString("Cancel"), 0, list.size(), (QWidget*)GetApp()->GetMainWindow());
+	progress.setWindowModality(Qt::WindowModal);
+
 	for (int i = 0; i < list.size(); ++i)
 	{
+		progress.setValue(i);
+
 		QFileInfo fileInfo = list.at(i);
 
 		XString file_name = fileInfo.fileName().toLatin1().constData();
@@ -230,7 +238,13 @@ int Project::LoadImageList()
 			Photo* pPhoto = new Photo(file_path);
 			m_ImageList.push_back(pPhoto);
 		}
+
+		if (progress.wasCanceled())
+		{
+			return -1;
+		}
 	}
+	progress.setValue(list.size());
 
 	delete mp_Recon;
 	mp_Recon = new Reconstruction(m_ImageList);

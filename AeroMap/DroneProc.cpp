@@ -48,7 +48,13 @@ int DroneProc::Run(Stage::Id initStage)
 	
 	AeroLib::InitRunLog();
 
-	if (GetProject().LoadImageList() == 0)
+	int load_status = GetProject().LoadImageList();
+	if (load_status == -1)
+	{
+		GetApp()->LogWrite("Load images canceled.");
+		return -1;
+	}
+	else if (load_status == 0)
 	{
 		GetApp()->LogWrite("No images found.");
 		return -1;
