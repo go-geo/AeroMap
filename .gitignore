@@ -20,6 +20,8 @@ Lib/jpeg-9a/x64/
 Lib/libpng-1.6.20/x64/
 Lib/pdal-2.3/x64/
 Lib/proj-7.1.1/build_vs14_x64/src/x64/
+Lib/tiff-4.7.0/Debug/
+Lib/tiff-4.7.0/Release/
 Lib/tiff-4.7.0/x64/
 Lib/tiff-4.7.0/x64/Debug/
 Lib/tiff-4.7.0/x64/Release/
@@ -67,3 +69,6 @@ proj_d.lib
 #*.exe
 *.out
 *.app
+
+!UnitTests/TestModel_OBJ/Data/*.obj
+
