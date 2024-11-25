@@ -12,7 +12,7 @@ public:
 	static double get_spacing(XString stats_file, double resolution_fallback = 5.0);
 	static void export_info_json(XString pointcloud_path, XString info_file_path);
 	static void export_summary_json(XString pointcloud_path, XString summary_file_path);
-
+	static void post_point_cloud_steps(bool rerun = false);
 };
 
 #endif // #ifndef POINTCLOUD_H

@@ -137,7 +137,7 @@ void StageSFM::DetectFeatures()
 	QStringList args;
 	args.push_back("detect_features");
 	args.push_back(tree.opensfm.c_str());
-	AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+	AeroLib::RunProgram(tree.prog_opensfm, args);
 	// cmd: opensfm detect_features "d:/test_odm/opensfm"
 }
 
@@ -147,7 +147,7 @@ void StageSFM::MatchFeatures()
 	QStringList args;
 	args.push_back("match_features");
 	args.push_back(tree.opensfm.c_str());
-	AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+	AeroLib::RunProgram(tree.prog_opensfm, args);
 	// cmd: opensfm match_features "d:/test_odm/opensfm"
 }
 
@@ -157,7 +157,7 @@ void StageSFM::CreateTracks()
 	QStringList args;
 	args.push_back("create_tracks");
 	args.push_back(tree.opensfm.c_str());
-	AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+	AeroLib::RunProgram(tree.prog_opensfm, args);
 	// cmd: opensfm create_tracks "d:/test_odm/opensfm"
 }
 
@@ -167,7 +167,7 @@ void StageSFM::Reconstruct()
 	QStringList args;
 	args.push_back("reconstruct");
 	args.push_back(tree.opensfm.c_str());
-	AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+	AeroLib::RunProgram(tree.prog_opensfm, args);
 	// cmd: opensfm reconstruct "d:/test_odm/opensfm"
 }
 
@@ -179,7 +179,7 @@ void StageSFM::ComputeStats()
 	args.push_back("--diagram_max_points");
 	args.push_back("100000");
 	args.push_back(tree.opensfm.c_str());
-	AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+	AeroLib::RunProgram(tree.prog_opensfm, args);
 	// cmd: opensfm compute_statistics --diagram_max_points 100000 "d:/test_odm/opensfm"
 }
 
@@ -199,7 +199,7 @@ void StageSFM::ExportGeocoords()
 		args.push_back("--offset-y");
 		args.push_back(XString::Format("%0.1f", georef.y).c_str());
 		args.push_back(tree.opensfm.c_str());
-		AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+		AeroLib::RunProgram(tree.prog_opensfm, args);
 		// cmd: opensfm export_geocoords --reconstruction 
 		//			--proj "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +type=crs"
 		//			--offset-x 322263.0 --offset-y 5157982.0 "d:/test_odm/opensfm"
@@ -214,7 +214,7 @@ void StageSFM::ExportPly()
 	args.push_back("--no-cameras");
 	args.push_back("--point-num-views");
 	args.push_back(tree.opensfm.c_str());
-	AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+	AeroLib::RunProgram(tree.prog_opensfm, args);
 	// cmd: opensfm export_ply --no-cameras --point-num-views "d:\test_aero\opensfm"
 }
 
@@ -225,7 +225,7 @@ void StageSFM::ExportVisualSfm()
 	args.push_back("export_visualsfm");
 	args.push_back("--points");
 	args.push_back(tree.opensfm.c_str());
-	AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+	AeroLib::RunProgram(tree.prog_opensfm, args);
 	// cmd: opensfm export_visualsfm --points "d:/test_odm/opensfm"
 }
 
@@ -235,7 +235,7 @@ void StageSFM::Undistort()
 	QStringList args;
 	args.push_back("undistort_aero");
 	args.push_back(tree.opensfm.c_str());
-	AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+	AeroLib::RunProgram(tree.prog_opensfm, args);
 }
 
 int StageSFM::Setup()

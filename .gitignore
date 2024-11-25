@@ -23,6 +23,8 @@ Lib/pdal-2.3/x64/
 Lib/proj-7.1.1/build_vs14_x64/src/x64/
 Lib/tiff-4.7.0/Debug/
 Lib/tiff-4.7.0/Release/
+Lib/tiff-4.7.0/libtiff/Debug/
+Lib/tiff-4.7.0/libtiff/Release/
 Lib/tiff-4.7.0/x64/
 Lib/tiff-4.7.0/x64/Debug/
 Lib/tiff-4.7.0/x64/Release/
@@ -40,6 +42,7 @@ proj_d.lib
 
 UnitTests/TestLibTiff/x64/
 UnitTests/TestPhoto/x64/
+UnitTests/TestProj/x64/
 UnitTests/TestTiffFile/x64/
 
 # Prerequisites

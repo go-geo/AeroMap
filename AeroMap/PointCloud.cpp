@@ -27,7 +27,7 @@ void PointCloud::filter(XString input_point_cloud, XString output_point_cloud, X
 
 	//if boundary is not None:
 	{
-	//	log.ODM_INFO("Boundary {}".format(boundary))
+	//	Logger::Write(__FUNCTION__, "Boundary {}".format(boundary))
 	//	fd, boundary_json_file = tempfile.mkstemp(suffix='.boundary.json')
 	//	os.close(fd)
 	//	with open(boundary_json_file, 'w') as f:
@@ -54,7 +54,7 @@ void PointCloud::filter(XString input_point_cloud, XString output_point_cloud, X
 		args.push_back("--radius");
 		args.push_back(XString::Format("%0.1f", sample_radius).c_str());
 	}
-	AeroLib::RunProgramEnv(tree.prog_filter, args);
+	AeroLib::RunProgram(tree.prog_filter, args);
 	// cmd: "C:\ODM-3.2.0\SuperBuild\install\bin\FPCFilter"
 	//			--input "d:\test_odm\opensfm\undistorted\openmvs\scene_dense_dense_filtered.ply"
 	//			--output "d:\test_odm\odm_filterpoints\point_cloud.ply" 
@@ -86,7 +86,7 @@ RectD PointCloud::get_extent(XString input_point_cloud)
 		QStringList args;
 		args.push_back("info");
 		args.push_back(input_point_cloud.c_str());
-		AeroLib::RunProgramEnv(tree.prog_pdal, args, json_file);
+		AeroLib::RunProgram(tree.prog_pdal, args, json_file);
 		//run('pdal info "{0}" > "{1}"'.format(input_point_cloud, json_file))
 	}
 	//try:
@@ -96,7 +96,7 @@ RectD PointCloud::get_extent(XString input_point_cloud)
 		args.push_back("info");
 		args.push_back("--summary");
 		args.push_back(input_point_cloud.c_str());
-		AeroLib::RunProgramEnv(tree.prog_pdal, args, json_file);
+		AeroLib::RunProgram(tree.prog_pdal, args, json_file);
 		//run('pdal info --summary "{0}" > "{1}"'.format(input_point_cloud, json_file))
 	}
 	//except:
@@ -110,38 +110,61 @@ RectD PointCloud::get_extent(XString input_point_cloud)
 	if (fallback == false)
 	{
 		json summary = data["summary"];
-		//if summary is None: raise Exception("Cannot compute summary for %s (summary key missing)" % input_point_cloud)
-		bounds = summary["bounds"];
+		if (summary == nullptr)
+			Logger::Write(__FUNCTION__, "Cannot compute summary for '%s' ('summary' key missing)", input_point_cloud.c_str());
+		else
+			bounds = summary["bounds"];
 	}
 	else
 	{
 		json stats = data["stats"];
-		//if stats is None: raise Exception("Cannot compute bounds for %s (stats key missing)" % input_point_cloud)
-		json bbox = stats["bbox"];
-		//if bbox is None: raise Exception("Cannot compute bounds for %s (bbox key missing)" % input_point_cloud)
-		json native = bbox["native"];
-		//if native is None: raise Exception("Cannot compute bounds for %s (native key missing)" % input_point_cloud)
-		bounds = native["bbox"];
+		if (stats == nullptr)
+		{
+			Logger::Write(__FUNCTION__, "Cannot compute bounds for '%s' ('stats' key missing)", input_point_cloud.c_str());
+		}
+		else
+		{
+			json bbox = stats["bbox"];
+			if (stats == nullptr)
+			{
+				Logger::Write(__FUNCTION__, "Cannot compute bounds for '%s' ('bbox' key missing)", input_point_cloud.c_str());
+			}
+			else
+			{
+				json native = bbox["native"];
+				if (native == nullptr)
+					Logger::Write(__FUNCTION__, "Cannot compute bounds for '%s' ('native' key missing)", input_point_cloud.c_str());
+				else
+					bounds = native["bbox"];
+			}
+		}
 	}
 
 	if (bounds == nullptr)
 	{
-		//raise Exception("Cannot compute bounds for %s (bounds key missing)" % input_point_cloud)
+		Logger::Write(__FUNCTION__, "Cannot compute bounds for %s ('bounds' key missing)", input_point_cloud.c_str());
 		assert(false);
 	}
+	else
+	{
+		if (bounds.contains("minx"))
+			extent.x0 = bounds["minx"];
+		else
+			Logger::Write(__FUNCTION__, "Cannot compute bounds for %s ('minx' key missing)", input_point_cloud.c_str());
+		if (bounds.contains("maxx"))
+			extent.x1 = bounds["maxx"];
+		else
+			Logger::Write(__FUNCTION__, "Cannot compute bounds for %s ('maxx' key missing)", input_point_cloud.c_str());
 
-	//if bounds.get('maxx', None) is None or \
-	//    bounds.get('minx', None) is None or \
-	//    bounds.get('maxy', None) is None or \
-	//    bounds.get('miny', None) is None or \
-	//    bounds.get('maxz', None) is None or \
-	//    bounds.get('minz', None) is None:
-	//    raise Exception("Cannot compute bounds for %s (invalid keys) %s" % (input_point_cloud, str(bounds)))
-
-	extent.x0 = bounds["minx"];
-	extent.x1 = bounds["maxx"];
-	extent.y0 = bounds["miny"];
-	extent.y1 = bounds["maxy"];
+		if (bounds.contains("miny"))
+			extent.y0 = bounds["miny"];
+		else
+			Logger::Write(__FUNCTION__, "Cannot compute bounds for %s ('miny' key missing)", input_point_cloud.c_str());
+		if (bounds.contains("miny"))
+			extent.y1 = bounds["maxy"];
+		else
+			Logger::Write(__FUNCTION__, "Cannot compute bounds for %s ('maxy' key missing)", input_point_cloud.c_str());
+	}
 
 	//os.remove(json_file)
 
@@ -217,7 +240,7 @@ double PointCloud::get_spacing(XString stats_file, double resolution_fallback)
 //    }
 
 //def split(input_point_cloud, outdir, filename_template, capacity, dims=None):
-//    log.ODM_INFO("Splitting point cloud filtering in chunks of {} vertices".format(capacity))
+//    Logger::Write(__FUNCTION__, "Splitting point cloud filtering in chunks of {} vertices".format(capacity))
 //
 //    if not os.path.exists(input_point_cloud):
 //        log.ODM_ERROR("{} does not exist, cannot split point cloud. The program will now exit.".format(input_point_cloud))
@@ -243,24 +266,33 @@ double PointCloud::get_spacing(XString stats_file, double resolution_fallback)
 
 void PointCloud::export_info_json(XString pointcloud_path, XString info_file_path)
 {
-	assert(false);	// implement
-	//    system.run('pdal info --dimensions "X,Y,Z" "{0}" > "{1}"'.format(pointcloud_path, info_file_path))
+	QStringList args;
+	args.push_back("info");
+	args.push_back("--dimensions");
+	args.push_back("\"X,Y,Z\"");
+	args.push_back(pointcloud_path.c_str());
+	AeroLib::RunProgram(tree.prog_pdal, args, info_file_path);
+	//system.run('pdal info --dimensions "X,Y,Z" "{0}" > "{1}"'.format(pointcloud_path, info_file_path))
 }
 
 void PointCloud::export_summary_json(XString pointcloud_path, XString summary_file_path)
 {
-	assert(false);	// implement
-	//    system.run('pdal info --summary "{0}" > "{1}"'.format(pointcloud_path, summary_file_path))
+	QStringList args;
+	args.push_back("info");
+	args.push_back("--summary");
+	args.push_back(pointcloud_path.c_str());
+	AeroLib::RunProgram(tree.prog_pdal, args, summary_file_path);
+	//system.run('pdal info --summary "{0}" > "{1}"'.format(pointcloud_path, summary_file_path))
 }
 
 //def merge(input_point_cloud_files, output_file, rerun=False):
 //    num_files = len(input_point_cloud_files)
 //    if num_files == 0:
-//        log.ODM_WARNING("No input point cloud files to process")
+//        Logger::Write(__FUNCTION__, "No input point cloud files to process")
 //        return
 //
-//    if io.file_exists(output_file):
-//        log.ODM_WARNING("Removing previous point cloud: %s" % output_file)
+//    if AeroLib::FIleExists(output_file):
+//        Logger::Write(__FUNCTION__, "Removing previous point cloud: %s" % output_file)
 //        os.remove(output_file)
 //
 //    kwargs = {
@@ -269,19 +301,18 @@ void PointCloud::export_summary_json(XString pointcloud_path, XString summary_fi
 //    }
 //
 //    system.run('lasmerge -i {all_inputs} -o "{output}"'.format(**kwargs))
-//
-//
+
 //def fast_merge_ply(input_point_cloud_files, output_file):
 //    # Assumes that all input files share the same header/content format
 //    # As the merge is a naive byte stream copy
 //
 //    num_files = len(input_point_cloud_files)
 //    if num_files == 0:
-//        log.ODM_WARNING("No input point cloud files to process")
+//        Logger::Write(__FUNCTION__, "No input point cloud files to process")
 //        return
 //
-//    if io.file_exists(output_file):
-//        log.ODM_WARNING("Removing previous point cloud: %s" % output_file)
+//    if AeroLib::FIleExists(output_file):
+//        Logger::Write(__FUNCTION__, "Removing previous point cloud: %s" % output_file)
 //        os.remove(output_file)
 //
 //    vertex_count = sum([ply_info(pcf)['vertex_count'] for pcf in input_point_cloud_files])
@@ -299,7 +330,7 @@ void PointCloud::export_summary_json(XString pointcloud_path, XString summary_fi
 //                # Intercept element vertex field
 //                if line.lower().startswith("element vertex "):
 //                    out.write(("element vertex %s\n" % vertex_count).encode('utf8'))
-//                else:
+//                else
 //                    out.write(line.encode('utf8'))
 //
 //                i += 1
@@ -322,12 +353,11 @@ void PointCloud::export_summary_json(XString pointcloud_path, XString summary_fi
 //                out.write(fin.read())
 //
 //    return output_file
-//
-//
+
 //def merge_ply(input_point_cloud_files, output_file, dims=None):
 //    num_files = len(input_point_cloud_files)
 //    if num_files == 0:
-//        log.ODM_WARNING("No input point cloud files to process")
+//        Logger::Write(__FUNCTION__, "No input point cloud files to process")
 //        return
 //
 //    cmd = [
@@ -340,43 +370,77 @@ void PointCloud::export_summary_json(XString pointcloud_path, XString summary_fi
 //    ]
 //
 //    system.run(' '.join(cmd))
-//
-//def post_point_cloud_steps(args, tree, rerun=False):
-//    # XYZ point cloud output
-//    if args.pc_csv:
-//        log.ODM_INFO("Creating CSV file (XYZ format)")
-//
-//        if not io.file_exists(tree.odm_georeferencing_xyz_file) or rerun:
-//            system.run("pdal translate -i \"{}\" "
-//                "-o \"{}\" "
-//                "--writers.text.format=csv "
-//                "--writers.text.order=\"X,Y,Z\" "
-//                "--writers.text.keep_unspecified=false ".format(
-//                    tree.odm_georeferencing_model_laz,
-//                    tree.odm_georeferencing_xyz_file))
-//        else:
-//            log.ODM_WARNING("Found existing CSV file %s" % tree.odm_georeferencing_xyz_file)
-//
-//    # LAS point cloud output
-//    if args.pc_las:
-//        log.ODM_INFO("Creating LAS file")
-//
-//        if not io.file_exists(tree.odm_georeferencing_model_las) or rerun:
-//            system.run("pdal translate -i \"{}\" "
-//                "-o \"{}\" ".format(
-//                    tree.odm_georeferencing_model_laz,
-//                    tree.odm_georeferencing_model_las))
-//        else:
-//            log.ODM_WARNING("Found existing LAS file %s" % tree.odm_georeferencing_xyz_file)
-//
-//    # EPT point cloud output
-//    if args.pc_ept:
-//        log.ODM_INFO("Creating Entwine Point Tile output")
-//        entwine.build([tree.odm_georeferencing_model_laz], tree.entwine_pointcloud, max_concurrency=args.max_concurrency, rerun=rerun)
-//
-//    # COPC point clouds
-//    if args.pc_copc:
-//        log.ODM_INFO("Creating Cloud Optimized Point Cloud (COPC)")
-//
-//        copc_output = io.related_file_path(tree.odm_georeferencing_model_laz, postfix=".copc")
-//        entwine.build_copc([tree.odm_georeferencing_model_laz], copc_output, convert_rgb_8_to_16=True)
+
+void PointCloud::post_point_cloud_steps(bool rerun)
+{
+    // XYZ point cloud output
+    if (arg.pc_csv)
+	{
+		Logger::Write(__FUNCTION__, "Creating CSV file (XYZ format)");
+
+	    if ((AeroLib::FileExists(tree.georef_model_xyz_file)== false)|| rerun)
+		{
+			QStringList args;
+			args.push_back("translate");
+			args.push_back("-i");
+			args.push_back(tree.georef_model_laz.c_str());
+			args.push_back("-o");
+			args.push_back(tree.georef_model_xyz_file.c_str());
+			args.push_back("--writers.text.format=csv");
+			args.push_back("--writers.text.order=\"X,Y,Z\"");
+			args.push_back("--writers.text.keep_unspecified=false");
+			AeroLib::RunProgram(tree.prog_pdal, args);
+			//system.run("pdal translate -i \"{}\" "
+			//    "-o \"{}\" "
+			//    "--writers.text.format=csv "
+			//    "--writers.text.order=\"X,Y,Z\" "
+			//    "--writers.text.keep_unspecified=false ".format(
+			//        tree.odm_georeferencing_model_laz,
+			//        tree.odm_georeferencing_xyz_file))
+		}
+	    else
+		{
+			Logger::Write(__FUNCTION__, "Found existing CSV file: '%s'", tree.georef_model_xyz_file);
+		}
+	}
+
+    // LAS point cloud output
+	if (arg.pc_las)
+	{
+		Logger::Write(__FUNCTION__, "Creating LAS file");
+
+	    if (AeroLib::FileExists(tree.georef_model_las) || rerun)
+		{
+			QStringList args;
+			args.push_back("translate");
+			args.push_back("-i");
+			args.push_back(tree.georef_model_laz.c_str());
+			args.push_back("-o");
+			args.push_back(tree.georef_model_las.c_str());
+			// system.run("pdal translate -i \"{}\" "
+			//            "-o \"{}\" ".format(
+			//                tree.odm_georeferencing_model_laz,
+			//                tree.odm_georeferencing_model_las))
+		}
+	    else
+		{
+			Logger::Write(__FUNCTION__, "Found existing LAS file: '%s'", tree.georef_model_las);
+		}
+	}
+
+    // EPT point cloud output
+	if (arg.pc_ept)
+	{
+		Logger::Write(__FUNCTION__, "Creating Entwine Point Tile output");
+		//entwine.build([tree.odm_georeferencing_model_laz], tree.entwine_pointcloud, max_concurrency=args.max_concurrency, rerun=rerun)
+	}
+
+    // COPC point clouds
+	if (arg.pc_copc)
+	{
+		Logger::Write(__FUNCTION__, "Creating Cloud Optimized Point Cloud (COPC)");
+
+		//copc_output = io.related_file_path(tree.odm_georeferencing_model_laz, postfix=".copc")
+		//entwine.build_copc([tree.odm_georeferencing_model_laz], copc_output, convert_rgb_8_to_16=True)
+	}
+}

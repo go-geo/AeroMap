@@ -170,7 +170,7 @@ void DEM::create_dem(
 		args.push_back("pipeline");
 		args.push_back("-i");
 		args.push_back(pipe_file.c_str());
-		AeroLib::RunProgramEnv(tree.prog_pdal, args);
+		AeroLib::RunProgram(tree.prog_pdal, args);
 	}
 
 	XString output_file = dem_type + ".tif";
@@ -196,7 +196,7 @@ void DEM::create_dem(
 	args.push_back("-input_file_list");
 	args.push_back(tiles_file_list.c_str());
 	args.push_back(tiles_vrt_path.c_str());
-	AeroLib::RunProgramEnv(tree.prog_gdal_buildvrt, args);
+	AeroLib::RunProgram(tree.prog_gdal_buildvrt, args);
 	//run('gdalbuildvrt -input_file_list "%s" "%s" ' % (tiles_file_list, tiles_vrt_path))
 
 	XString merged_vrt_path = XString::CombinePath(outdir, "merged.vrt");
@@ -238,7 +238,7 @@ void DEM::create_dem(
 		args.push_back("34.85%");
 		args.push_back(tiles_vrt_path.c_str());
 		args.push_back(geotiff_tmp_path.c_str());
-		AeroLib::RunProgramEnv(tree.prog_gdal_translate, args);
+		AeroLib::RunProgram(tree.prog_gdal_translate, args);
 		// cmd: gdal_translate 
 		//			-co NUM_THREADS=16 -co BIGTIFF=IF_SAFER --config GDAL_CACHEMAX 34.85%
 		//          "d:\test_odm\odm_meshing\tmp\tiles.vrt" 
@@ -261,7 +261,7 @@ void DEM::create_dem(
 		args.push_back("0");
 		args.push_back(geotiff_tmp_path.c_str());
 		args.push_back(geotiff_small_path.c_str());
-		AeroLib::RunProgramEnv(tree.prog_gdal_translate, args);
+		AeroLib::RunProgram(tree.prog_gdal_translate, args);
 		// cmd: gdal_translate -co NUM_THREADS=16 -co BIGTIFF=IF_SAFER --config GDAL_CACHEMAX 34.85% 
 		//          -outsize 10% 0 
 		//          "d:\test_odm\odm_meshing\tmp\tiles.tmp.tif" 
@@ -286,7 +286,7 @@ void DEM::create_dem(
 		args.push_back(merged_vrt_path.c_str());
 		args.push_back(geotiff_small_filled_path.c_str());
 		args.push_back(geotiff_tmp_path.c_str());
-		AeroLib::RunProgramEnv(tree.prog_gdal_buildvrt, args);
+		AeroLib::RunProgram(tree.prog_gdal_buildvrt, args);
 		//    run('gdalbuildvrt -resolution highest -r bilinear "%s" "%s" "%s"' % (merged_vrt_path, geotiff_small_filled_path, geotiff_tmp_path))
 		// cmd: gdalbuildvrt 
 		//          -resolution highest -r bilinear 
@@ -310,7 +310,7 @@ void DEM::create_dem(
 		args.push_back("34.85%");
 		args.push_back(merged_vrt_path.c_str());
 		args.push_back(geotiff_path.c_str());
-		AeroLib::RunProgramEnv(tree.prog_gdal_translate, args);
+		AeroLib::RunProgram(tree.prog_gdal_translate, args);
 		// cmd: gdal_translate 
 		//          -co NUM_THREADS=16 -co TILED=YES -co BIGTIFF=IF_SAFER -co COMPRESS=DEFLATE
 		//          --config GDAL_CACHEMAX 34.85% 
@@ -343,7 +343,7 @@ void DEM::create_dem(
 		args.push_back("34.85%");               //TODO: get_max_memory()
 		args.push_back(tiles_vrt_path.c_str());
 		args.push_back(geotiff_path.c_str());
-		AeroLib::RunProgramEnv(tree.prog_gdal_translate, args);
+		AeroLib::RunProgram(tree.prog_gdal_translate, args);
 		// run('gdal_translate '
 		//            '-co NUM_THREADS={threads} '
 		//            '-co TILED=YES '

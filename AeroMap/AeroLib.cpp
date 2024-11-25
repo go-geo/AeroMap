@@ -9,7 +9,7 @@ constexpr char* RUN_LOG = "run_log.txt";
 
 namespace AeroLib
 {
-	int RunProgramEnv(const char* prog, QStringList args, const char* output_file)
+	int RunProgram(const char* prog, QStringList args, const char* output_file)
 	{
 		// Run external program, setting environment variables as needed.
 		//
@@ -512,7 +512,7 @@ namespace AeroLib
 
 		QStringList args;
 		args.push_back(file_name.c_str());
-		AeroLib::RunProgramEnv(tree.prog_gdal_info, args, out_file);
+		AeroLib::RunProgram(tree.prog_gdal_info, args, out_file);
 
 		if (FileExists(out_file))
 		{

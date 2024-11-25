@@ -28,7 +28,7 @@ int StageMVS::Run()
 		QStringList args;
 		args.push_back("export_openmvs");
 		args.push_back(tree.opensfm.c_str());
-		AeroLib::RunProgramEnv(tree.prog_opensfm, args);
+		AeroLib::RunProgram(tree.prog_opensfm, args);
 		// cmd: opensfm export_openmvs "d:\test_odm\opensfm"
 
 		XString depthmaps_dir = XString::CombinePath(tree.openmvs, "depthmaps");
@@ -70,7 +70,7 @@ int StageMVS::Run()
 		args.push_back("0");
 		args.push_back("--cuda-device");
 		args.push_back("-1");
-		AeroLib::RunProgramEnv(tree.prog_densify, args);
+		AeroLib::RunProgram(tree.prog_densify, args);
 		// cmd: DensifyPointCloud 
 		//			"d:/test_odm/opensfm/undistorted/openmvs/scene.mvs"
 		//			-w "d:/test_odm/opensfm/undistorted/openmvs/depthmaps"
@@ -90,7 +90,7 @@ int StageMVS::Run()
 		args.push_back("0");
 		args.push_back("--cuda-device");
 		args.push_back("-1");
-		AeroLib::RunProgramEnv(tree.prog_densify, args);
+		AeroLib::RunProgram(tree.prog_densify, args);
 		// cmd: DensifyPointCloud 
 		//			--filter-point-cloud -20
 		//			-i "d:\test_odm\opensfm\undistorted\openmvs\scene_dense.mvs"

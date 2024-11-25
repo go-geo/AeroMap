@@ -135,7 +135,7 @@ int StageOrtho::Run()
 		args.push_back("--config");
 		args.push_back("GDAL_CACHEMAX");
 		args.push_back("11983939584.0");		//TODO: (get_max_memory_mb() * 1024 * 1024)
-		AeroLib::RunProgramEnv(tree.prog_odm_orthophoto, args);
+		AeroLib::RunProgram(tree.prog_odm_orthophoto, args);
 		// cmd: odm_orthophoto 
 		//			-inputFiles "d:/test_odm/odm_texturing_25d/odm_textured_model_geo.obj" 
 		//			-logFile "d:/test_odm/odm_orthophoto/odm_orthophoto_log.txt"

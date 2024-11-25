@@ -407,16 +407,6 @@ void Project::InitArg()
 	//					Automatically crop image outputs by creating a smooth buffer around the dataset boundaries,
 	//					shrunk by N meters. Use 0 to disable cropping. Default: 3
 
-	arg.pc_filter = 2.5;
-	// --pc-filter <positive float>
-	//					Filters the point cloud by removing points that deviate more than N standard deviations from
-	//					the local mean. Set to 0 to disable filtering. Default: 2.5
-	arg.pc_sample = 0.0;
-	// --pc-sample <positive float>
-	//					Filters the point cloud by keeping only a single point around a radius N (in meters). This can
-	//					be useful to limit the output resolution of the point cloud and remove duplicate points. Set
-	//					to 0 to disable sampling. Default: 0
-
 	arg.mesh_size = 200000;
 	// --mesh-size <positive integer>
 	//					The maximum vertex count of the output mesh.
@@ -451,6 +441,15 @@ void Project::InitArg()
 	//					it, and even then: do not use it. 
 	//					Default: False
 
+	arg.pc_filter = 2.5;
+	// --pc-filter <positive float>
+	//					Filters the point cloud by removing points that deviate more than N standard deviations from
+	//					the local mean. Set to 0 to disable filtering. Default: 2.5
+	arg.pc_sample = 0.0;
+	// --pc-sample <positive float>
+	//					Filters the point cloud by keeping only a single point around a radius N (in meters). This can
+	//					be useful to limit the output resolution of the point cloud and remove duplicate points. Set
+	//					to 0 to disable sampling. Default: 0
 	arg.pc_quality = "medium";
 	// --pc-quality <string>
 	//					Set point cloud quality. Higher quality generates better, denser point clouds, but requires
@@ -464,6 +463,19 @@ void Project::InitArg()
 	// --pc-rectify		Perform ground rectification on the point cloud. This means that wrongly classified ground
 	//					points will be re-classified and gaps will be filled. Useful for generating DTMs. Default:
 	//					False
+	arg.pc_csv = false;
+	// --pc-csv         Export the georeferenced point cloud in CSV format. Default: False
+	arg.pc_las = false;
+	// --pc-las         Export the georeferenced point cloud in LAS format. Default: False
+	arg.pc_ept = false;
+	// --pc-ept         Export the georeferenced point cloud in Entwine Point Tile (EPT) format. Default: False
+	arg.pc_copc = false;
+	// --pc-copc        Save the georeferenced point cloud in Cloud Optimized Point Cloud (COPC) format. Default: False
+	arg.pc_skip_geometric = false;
+	// --pc-skip-geometric
+	//					Geometric estimates improve the accuracy of the point cloud by computing geometrically
+	//					consistent depthmaps but may not be usable in larger datasets. This flag disables geometric
+	//					estimates. Default: False
 
 	arg.radiometric_calibration = "";
 	// --radiometric-calibration <string>
@@ -475,15 +487,6 @@ void Project::InitArg()
 	//					plus compensates for spectral radiance registered via a downwelling light sensor (DLS) taking
 	//					in consideration the angle of the sun. Can be one of: none, camera, camera+sun. 
 	//					Default: none
-
-	// --pc-csv         Export the georeferenced point cloud in CSV format. Default: False
-	// --pc-las         Export the georeferenced point cloud in LAS format. Default: False
-	// --pc-ept         Export the georeferenced point cloud in Entwine Point Tile (EPT) format. Default: False
-	// --pc-copc        Save the georeferenced point cloud in Cloud Optimized Point Cloud (COPC) format. Default: False
-	// --pc-skip-geometric   
-	//					Geometric estimates improve the accuracy of the point cloud by computing geometrically
-	//					consistent depthmaps but may not be usable in larger datasets. This flag disables geometric
-	//					estimates. Default: False
 
 	arg.primary_band = "auto";
 	// --primary-band <string>
@@ -581,11 +584,13 @@ void Project::InitArg()
 	// --texturing-single-material
 	//					Generate OBJs that have a single material and a single texture file instead of multiple ones.
 	//					Default: False
-	// --gltf                Generate single file Binary glTF (GLB) textured models. Default: False
-	// --gcp <path string>   Path to the file containing the ground control points used for georeferencing. The file needs
+	// --gltf           Generate single file Binary glTF (GLB) textured models. Default: False
+	// --gcp <path string>
+	//					Path to the file containing the ground control points used for georeferencing. The file needs
 	//					to use the following format: EPSG:<code> or <+proj definition> geo_x geo_y geo_z im_x im_y
 	//					image_name [gcp_name] [extra1] [extra2] Default: None
-	// --geo <path string>   Path to the image geolocation file containing the camera center coordinates used for
+	// --geo <path string>
+	//					Path to the image geolocation file containing the camera center coordinates used for
 	//					georeferencing. If you don't have values for yaw/pitch/roll you can set them to 0. The file
 	//					needs to use the following format: EPSG:<code> or <+proj definition> image_name geo_x geo_y
 	//					geo_z [yaw (degrees)] [pitch (degrees)] [roll (degrees)] [horz accuracy (meters)] [vert
@@ -683,6 +688,9 @@ void Project::InitTree()
 
 	tree.georef_path = XString::CombinePath(ms_DroneOutputPath, "odm_georeferencing");
 	tree.georef_model_laz = XString::CombinePath(tree.georef_path, "odm_georeferenced_model.laz");
+	tree.georef_model_las = XString::CombinePath(tree.georef_path, "odm_georeferenced_model.las");
+	tree.georef_model_txt_geo = XString::CombinePath(tree.georef_path, "odm_georeferencing_model_geo.txt");
+	tree.georef_model_xyz_file = XString::CombinePath(tree.georef_path, "odm_georeferenced_model.csv");
 	tree.georef_coords = XString::CombinePath(tree.georef_path, "coords.txt");
 	tree.georef_proj = "proj.txt";
 	tree.georef_gcp = "";

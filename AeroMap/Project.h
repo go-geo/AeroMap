@@ -35,6 +35,11 @@ struct ArgType
 	double pc_sample;
 	bool   pc_classify;
 	bool   pc_rectify;
+	bool   pc_csv;
+	bool   pc_las;
+	bool   pc_ept;
+	bool   pc_copc;
+	bool   pc_skip_geometric;
 	std::string pc_quality;			// unknown problem using XString in this context
 
 	double crop;
@@ -80,6 +85,10 @@ struct TreeType
 
 	XString georef_path;					// root output georef path
 	XString georef_model_laz;
+	XString georef_model_las;
+	XString georef_model_txt_geo;
+	XString georef_model_xyz_file;
+
 	XString georef_gcp;
 	XString georef_coords;
 	XString georef_gcp_utm;

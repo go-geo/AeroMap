@@ -206,7 +206,7 @@ void StageDEM::generate_terrain_model(XString product, double resolution)
 		args.push_back("0");
 		args.push_back(tiff_file.c_str());
 		args.push_back(tiff_file_small.c_str());
-		AeroLib::RunProgramEnv(tree.prog_gdal_translate, args);
+		AeroLib::RunProgram(tree.prog_gdal_translate, args);
 
 		cv::Mat mat = cv::imread(tiff_file_small.c_str(), cv::IMREAD_LOAD_GDAL);
 		int rows = mat.rows;

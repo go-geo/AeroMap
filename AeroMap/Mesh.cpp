@@ -55,7 +55,7 @@ XString Mesh::screened_poisson_reconstruction(XString inPointCloud, XString outM
         args.push_back("--bType");              // boundary type (1=free, 2=Dirichlet, 3=Neumann)
         args.push_back("2");
         args.push_back("--linearFit");
-        AeroLib::RunProgramEnv(tree.prog_poisson, args);
+        AeroLib::RunProgram(tree.prog_poisson, args);
         // cmd: PoissonRecon 
         //          --in "d:/test_odm/odm_filterpoints/point_cloud.ply" 
         //          --out "d:/test_odm/odm_meshing/odm_mesh.dirty.ply" 
@@ -103,7 +103,7 @@ XString Mesh::screened_poisson_reconstruction(XString inPointCloud, XString outM
     args.push_back(XString::Format("%d", max_faces).c_str());
     args.push_back("-v");
     args.push_back("0");
-    AeroLib::RunProgramEnv(tree.prog_recon_mesh, args);
+    AeroLib::RunProgram(tree.prog_recon_mesh, args);
     // cmd: ReconstructMesh 
     //          -i "d:/test_odm/odm_meshing/odm_mesh.dirty.ply" 
     //          -o "d:/test_odm/odm_meshing/odm_mesh.ply" 
@@ -176,7 +176,7 @@ XString Mesh::dem_to_points(XString inGeotiff, XString outPointCloud)
     args.push_back("-skirtHeightCap");
     args.push_back("100");
     args.push_back("-verbose");
-    AeroLib::RunProgramEnv(tree.prog_dem2points, args);
+    AeroLib::RunProgram(tree.prog_dem2points, args);
     // system.run('"{bin}" 
     //          -inputFile "{infile}" '         input DSM raster
     //         '-outputFile "{outfile}"         output PLY points
@@ -231,7 +231,7 @@ XString Mesh::dem_to_mesh_gridded(XString inGeotiff, XString outMesh, int maxVer
         args.push_back("-edgeSwapThreshold");
         args.push_back("0.15");
         args.push_back("-verbose");
-        AeroLib::RunProgramEnv(tree.prog_dem2mesh, args);
+        AeroLib::RunProgram(tree.prog_dem2mesh, args);
         // system.run('"{bin}" -inputFile "{infile}" '
         //        '-outputFile "{outfile}" '
         //        '-maxTileLength 2000 '
@@ -279,7 +279,7 @@ XString Mesh::dem_to_mesh_gridded(XString inGeotiff, XString outMesh, int maxVer
     args.push_back(XString::Format("%d", max_faces).c_str());
     args.push_back("-v");
     args.push_back("0");
-    AeroLib::RunProgramEnv(tree.prog_recon_mesh, args);
+    AeroLib::RunProgram(tree.prog_recon_mesh, args);
     //system.run('"{reconstructmesh}" -i "{infile}" '
     //     '-o "{outfile}" '
     //     '--archive-type 3 '

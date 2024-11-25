@@ -2,6 +2,10 @@
 // Port of odm cropper.py
 //
 
+#include <fstream>
+#include <nlohmann/json.h>
+using json = nlohmann::json;
+
 #include "AeroLib.h"
 #include "PointCloud.h"
 #include "Cropper.h"
@@ -50,7 +54,7 @@ XString Cropper::crop(XString gpkg_path, XString geotiff_path, bool keep_origina
 	AeroLib::Replace(geotiff_path, original_geotiff);
 
 	//    try:
-	
+
 	QStringList args;
 	args.push_back("-cutline");
 	args.push_back(gpkg_path.c_str());
@@ -72,7 +76,7 @@ XString Cropper::crop(XString gpkg_path, XString geotiff_path, bool keep_origina
 	args.push_back("--config");
 	args.push_back("GDAL_CACHEMAX");
 	args.push_back("35.4%");							// TODO: get_max_memory()
-	AeroLib::RunProgramEnv(tree.prog_gdal_warp, args);
+	AeroLib::RunProgram(tree.prog_gdal_warp, args);
 	// cmd: gdalwarp 
 	//			-cutline "d:\test_odm\odm_georeferencing\odm_georeferenced_model.bounds.gpkg" 
 	//			-crop_to_cutline 
@@ -80,10 +84,10 @@ XString Cropper::crop(XString gpkg_path, XString geotiff_path, bool keep_origina
 	//			"d:\test_odm\odm_dem\dsm.original.tif" 
 	//			"d:\test_odm\odm_dem\dsm.tif" 
 	//			--config GDAL_CACHEMAX 35.4%
-	
+
 	if (keep_original == false)
 		AeroLib::RemoveFile(original_geotiff);
-	
+
 	// if out file not exist?
 	//    except Exception as e:
 	//        Logger::Write(__FUNCTION__('Something went wrong while cropping: {}'.format(e))
@@ -108,14 +112,15 @@ void Cropper::merge_bounds(std::vector<XString> input_bound_files, XString outpu
 	// of all bounds (minus a buffer distance in meters)
 	//
 
-	OGRGeometryCollection geomcol;
-	//how to create?
-    //geomcol = ogr.Geometry(ogr.wkbGeometryCollection)
+	// untested attempt to create geomcol
+	OGRGeometry* geom = OGRGeometryFactory::createGeometry(OGRwkbGeometryType::wkbGeometryCollection);
+	OGRGeometryCollection* geomcol = (OGRGeometryCollection*)geom;
+	//geomcol = ogr.Geometry(ogr.wkbGeometryCollection)
 
 	GDALDriver* driver = static_cast<GDALDriver*>(GDALGetDriverByName("GPKG"));
- 	//srs = None
+	//srs = None
 
-    for (XString input_bound_file : input_bound_files)
+	for (XString input_bound_file : input_bound_files)
 	{
 		GDALDataset* ds = (GDALDataset*)GDALOpen(input_bound_file.c_str(), GA_ReadOnly);
 
@@ -126,40 +131,45 @@ void Cropper::merge_bounds(std::vector<XString> input_bound_files, XString outpu
 		int feature_count = layer->GetFeatureCount();
 		for (int i = 0; i < feature_count; ++i)
 		{
-			geomcol.addGeometry(layer->GetFeature(i)->GetGeometryRef());
+			geomcol->addGeometry(layer->GetFeature(i)->GetGeometryRef());
 		}
 
 		GDALClose(ds);
 	}
 
-    // Calculate convex hull
-    //convexhull = geomcol.ConvexHull()
+	// Calculate convex hull
+	OGRGeometry* convexhull = geomcol->ConvexHull();
 
-    // If buffer distance is specified
-    // Create two buffers, one shrunk by
-    // N + 3 and then that buffer expanded by 3
-    // so that we get smooth corners. \m/
+	// If buffer distance is specified
+	// Create two buffers, one shrunk by
+	// N + 3 and then that buffer expanded by 3
+	// so that we get smooth corners. \m/
 	const int BUFFER_SMOOTH_DISTANCE = 3;
 
-    //if buffer_distance > 0:
-    //    convexhull = convexhull.Buffer(-(buffer_distance + BUFFER_SMOOTH_DISTANCE))
-    //    convexhull = convexhull.Buffer(BUFFER_SMOOTH_DISTANCE)
+	if (buffer_distance > 0)
+	{
+		convexhull = convexhull->Buffer(-(buffer_distance + BUFFER_SMOOTH_DISTANCE));
+		convexhull = convexhull->Buffer(BUFFER_SMOOTH_DISTANCE);
+	}
 
-    // Save to a new file
-    //if AeroLib::FileExists(output_bounds):
-    //    driver.DeleteDataSource(output_bounds)
+	// Save to a new file
+	AeroLib::RemoveFile(output_bounds);
 
-    //out_ds = driver.CreateDataSource(output_bounds)
-    //layer = out_ds.CreateLayer("convexhull", srs=srs, geom_type=ogr.wkbPolygon)
+	//out_ds = driver.CreateDataSource(output_bounds)
+	//layer = out_ds.CreateLayer("convexhull", srs=srs, geom_type=ogr.wkbPolygon)
 
-    //feature_def = layer.GetLayerDefn()
-    //feature = ogr.Feature(feature_def)
-    //feature.SetGeometry(convexhull)
-    //layer.CreateFeature(feature)
-    //feature = None
+	//feature_def = layer.GetLayerDefn()
+	//feature = ogr.Feature(feature_def)
+	//feature.SetGeometry(convexhull)
+	//layer.CreateFeature(feature)
+	//feature = None
 
-    // Save and close output data source
-    //out_ds = None
+	// Save and close output data source
+	//out_ds = None
+
+	// proper way to free these?
+	//delete convexhull;
+	//delete geomcol;
 }
 
 XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_distance, int decimation_step)
@@ -169,7 +179,7 @@ XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_dista
 	//
 	// return filename to GeoJSON containing the polygon
 	//
-	
+
 	if (AeroLib::FileExists(pointcloud_path) == false)
 	{
 		Logger::Write(__FUNCTION__, "Point cloud does not exist, cannot generate bounds: '%s'", pointcloud_path.c_str());
@@ -178,12 +188,26 @@ XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_dista
 
 	// Do decimation prior to extracting boundary information
 	XString decimated_pointcloud_path = path("decimated.las");
-	
+
+	QStringList args;
+	args.push_back("translate");
+	args.push_back("-i");
+	args.push_back(pointcloud_path.c_str());
+	args.push_back("-o");
+	args.push_back(decimated_pointcloud_path.c_str());
+	args.push_back("decimation");
+	args.push_back(XString::Format("--filters.decimation.step=%d", decimation_step).c_str());
+	AeroLib::RunProgram(tree.prog_pdal, args);
 	//    run("pdal translate -i \"{}\" "
 	//        "-o \"{}\" "
 	//        "decimation "
 	//        "--filters.decimation.step={} ".format(pointcloud_path, decimated_pointcloud_path, decimation_step))
-	
+	// cmd: pdal translate 
+	//			-i "d:\test_odm\odm_georeferencing\odm_georeferenced_model.laz" 
+	//			-o "d:\test_odm\odm_georeferencing\odm_georeferenced_model.decimated.las" 
+	//			decimation 
+	//			--filters.decimation.step=40 
+
 	if (AeroLib::FileExists(decimated_pointcloud_path) == false)
 	{
 		Logger::Write(__FUNCTION__, "Could not decimate point cloud, thus cannot generate GPKG bounds: '%s'", decimated_pointcloud_path.c_str());
@@ -192,20 +216,30 @@ XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_dista
 
 	// Use PDAL to dump boundary information
 	// then read the information back
-	
+
 	XString boundary_file_path = path("boundary.json");
-	
-	//run('pdal info --boundary --filters.hexbin.edge_size=1 --filters.hexbin.threshold=0 "{0}" > "{1}"'.format(decimated_pointcloud_path,  boundary_file_path))
-	
-	//    pc_geojson_boundary_feature = None
-	
-	//    with open(boundary_file_path, 'r') as f:
-	//        json_f = json.loads(f.read())
-	//        pc_geojson_boundary_feature = json_f['boundary']['boundary_json']
-	
-	//    if pc_geojson_boundary_feature is None: 
-	//			raise RuntimeError("Could not determine point cloud boundaries")
-	
+
+	args.clear();
+	args.push_back("info");
+	args.push_back("--boundary");
+	args.push_back("--filters.hexbin.edge_size=1");
+	args.push_back("--filters.hexbin.threshold=0");
+	args.push_back(decimated_pointcloud_path.c_str());
+	AeroLib::RunProgram(tree.prog_pdal, args, boundary_file_path);
+	// cmd: pdal info --boundary --filters.hexbin.edge_size=1 --filters.hexbin.threshold=0 
+	//			"d:\test_odm\odm_georeferencing\odm_georeferenced_model.decimated.las" > "d:\test_odm\odm_georeferencing\odm_georeferenced_model.boundary.json"
+
+	json pc_geojson_boundary_feature = nullptr;
+
+	std::ifstream f(boundary_file_path.c_str());
+	json data = json::parse(f);
+	pc_geojson_boundary_feature = data["boundary"]["boundary_json"];
+	if (pc_geojson_boundary_feature == nullptr)
+	{
+		Logger::Write(__FUNCTION__, "Could not determine point cloud boundaries");
+		assert(false);
+	}
+
 	// Write bounds to GeoJSON
 	XString tmp_bounds_geojson_path = path("tmp-bounds.geojson");
 	//    with open(tmp_bounds_geojson_path, "w") as f:
@@ -216,18 +250,18 @@ XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_dista
 	//                "geometry": pc_geojson_boundary_feature
 	//            }]
 	//        }))
-	
+
 	// Create a convex hull around the boundary
 	// as to encompass the entire area (no holes)
-		  GDALDriver* driver = static_cast<GDALDriver*>(GDALGetDriverByName("GeoJSON")); 
+	GDALDriver* driver = static_cast<GDALDriver*>(GDALGetDriverByName("GeoJSON"));
 	//    ds = driver.Open(tmp_bounds_geojson_path, 0) # ready-only
 	//    layer = ds.GetLayer()
-	
+
 	// Collect all Geometry
 	//    geomcol = ogr.Geometry(ogr.wkbGeometryCollection)
 	//    for feature in layer:
 	//        geomcol.AddGeometry(feature.GetGeometryRef())
-	
+
 	// Calculate convex hull
 	//    convexhull = geomcol.ConvexHull()
 
@@ -252,7 +286,7 @@ XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_dista
 	// Save to a new file
 	XString bounds_geojson_path = path("bounds.geojson");
 	AeroLib::RemoveFile(bounds_geojson_path);
-	
+
 	//    out_ds = driver.CreateDataSource(bounds_geojson_path)
 	//    layer = out_ds.CreateLayer("convexhull", geom_type=ogr.wkbPolygon)
 
@@ -261,7 +295,7 @@ XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_dista
 	//    feature.SetGeometry(convexhull)
 	//    layer.CreateFeature(feature)
 	//    feature = None
-	
+
 	// Save and close data sources
 	//    out_ds = ds = None
 

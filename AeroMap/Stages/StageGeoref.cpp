@@ -150,7 +150,7 @@ int StageGeoref::Run()
 			args.push_back("pipeline");
 			args.push_back("-i");
 			args.push_back(pipe_file.c_str());
-			AeroLib::RunProgramEnv(tree.prog_pdal, args);
+			AeroLib::RunProgram(tree.prog_pdal, args);
 
 			// original command:
 			// pdal translate 

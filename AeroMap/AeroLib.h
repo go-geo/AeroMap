@@ -6,7 +6,7 @@
 
 namespace AeroLib
 {
-	int  RunProgramEnv(const char* prog, QStringList args, const char* output_file = nullptr);
+	int  RunProgram(const char* prog, QStringList args, const char* output_file = nullptr);
 	void InitRunLog();
 	void WriteRunLog(const char* text);
 

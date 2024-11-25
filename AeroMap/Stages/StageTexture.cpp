@@ -80,7 +80,7 @@ int StageTexture::TextureModel3D()
 		args.push_back("none");					// Tone mapping method: {none, gamma}
 		args.push_back("--no_intermediate_results");
 		args.push_back(XString::Format("--max_texture_size=%d", m_max_texture_size).c_str());
-		AeroLib::RunProgramEnv(tree.prog_recon_tex, args);
+		AeroLib::RunProgram(tree.prog_recon_tex, args);
 		// cmd: texrecon 
 		//			"d:/test_odm/opensfm/undistorted/reconstruction.nvm" 
 		//			"d:/test_odm/odm_meshing/odm_mesh.ply" 
@@ -121,7 +121,7 @@ int StageTexture::TextureModel25D()
 		args.push_back("--nadir_mode");
 		args.push_back("--no_intermediate_results");
 		args.push_back(XString::Format("--max_texture_size=%d", m_max_texture_size).c_str());
-		AeroLib::RunProgramEnv(tree.prog_recon_tex, args);
+		AeroLib::RunProgram(tree.prog_recon_tex, args);
 		// cmd: texrecon 
 		//			"d:/test_odm/opensfm/undistorted/reconstruction.nvm" 
 		//			"d:/test_odm/odm_meshing/odm_25dmesh.ply" 
