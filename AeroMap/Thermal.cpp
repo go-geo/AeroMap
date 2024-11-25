@@ -4,19 +4,12 @@
 
 #include "Thermal.h"
 
-//import cv2
-//import os
-//from opendm import log
-//from opendm.thermal_tools import dji_unpack
-//from opendm.exiftool import extract_raw_thermal_image_data
-//from opendm.thermal_tools.thermal_utils import sensor_vals_to_temp
-//
-Photo* Thermal::resize_to_match(Photo* image, Photo* match_photo)
+Photo* Thermal::resize_to_match(Photo* photo, Photo* match_photo)
 {
 	// Resize images to match the dimension of another photo
 	// 
 	// Inputs:
-	//		image		= photo to resize
+	//		photo		= photo to resize
 	//		match_photo = photo whose dimensions should be used for resize
 	// Outputs:
 	//		return		= resized image
@@ -24,18 +17,17 @@ Photo* Thermal::resize_to_match(Photo* image, Photo* match_photo)
 	
 	if (match_photo != nullptr)
 	{
-		int w = image->GetWidth();
-		int h = image->GetHeight();
+		int w = photo->GetWidth();
+		int h = photo->GetHeight();
 		if (w != match_photo->GetWidth() || h != match_photo->GetHeight())
 		{
-            //image = cv2.resize(image, None,
-            //        fx=match_photo.width/w,
-            //        fy=match_photo.height/h,
-            //        interpolation=cv2.INTER_LANCZOS4)
+			double fx = (double)match_photo->GetWidth() / (double)w;
+			double fy = (double)match_photo->GetHeight() / (double)h;
+			cv::resize(photo->image, photo->image, cv::Size(), fx, fy, cv::INTER_LANCZOS4);
 		}
 	}
 
-	return image;
+	return photo;
 }
 
 Photo* Thermal::dn_to_temperature(Photo* photo, Photo* image, XString images_path)

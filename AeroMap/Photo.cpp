@@ -31,7 +31,7 @@ Photo::Photo(XString file_name)
 {
     m_file_name = file_name;
 
-    m_image = cv::imread(file_name.c_str());
+    image = cv::imread(file_name.c_str());
 
     //m_mask = None
 
@@ -208,6 +208,8 @@ void Photo::parse_tiff_values(XString file_name)
             m_band_name = tiny_exif.BandName.c_str();
             m_gain = tiny_exif.BandGain;
             m_gain_adjustment = tiny_exif.GainAdjustment;
+            m_capture_uuid = tiny_exif.CaptureUUID.c_str();
+            m_capture_uuid.MakeUpper();
 
             // these are raw ypr values - some models will require interpretation
             m_yaw = tiny_exif.GeoLocation.YawDegree;
@@ -378,8 +380,8 @@ void Photo::parse_exif_values(XString file_name)
     
     if (m_width == 0 || m_height == 0)
     {
-        m_width = m_image.cols;
-        m_height = m_image.rows;
+        m_width = image.cols;
+        m_height = image.rows;
     }
 
     m_exif_width = m_width;
@@ -919,9 +921,13 @@ double Photo::get_mm_per_unit(int resolution_unit)
 //
 //                return coeffs
 
-//    def get_utc_time(self):
-//        if self.utc_time:
-//            return datetime.fromtimestamp(self.utc_time / 1000, timezone.utc)
+XString Photo::get_utc_time()
+{
+    //if (m_utc_time.IsEmpty() == false)
+      //  return datetime.fromtimestamp(self.utc_time / 1000, timezone.utc);
+
+    return "";
+}
 
 double Photo::GetPhotometricExposure()
 {
@@ -973,12 +979,14 @@ double Photo::GetPhotometricExposure()
 //
 //        return None
 
-//    def get_capture_id(self):
-//        # Use capture UUID first, capture time as fallback
-//        if self.capture_uuid is not None:
-//            return self.capture_uuid
-//
-//        return self.get_utc_time()
+XString Photo::get_capture_id()
+{
+    // Use capture UUID first, capture time as fallback
+    if (m_capture_uuid.IsEmpty() == false)
+        return m_capture_uuid;
+
+    return get_utc_time();
+}
 
 //    def get_gps_dop(self):
 //        val = -9999

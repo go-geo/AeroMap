@@ -11,6 +11,10 @@
 class Photo
 {
 public:
+
+    cv::Mat image;            // full image loaded into 2d array
+
+public:
 	
 	Photo();
 	Photo(XString file_name);
@@ -61,6 +65,8 @@ public:
     double GetGainAdjustment();
     double GetPhotometricExposure();
     double get_capture_megapixels();
+    XString get_capture_id();
+    XString get_utc_time();
 
 	static SizeType find_largest_photo_dims(const std::vector<Photo*>& photos);
 	static int      find_largest_photo_dim(const std::vector<Photo*>& photos);
@@ -73,8 +79,6 @@ public:
 private:
 
     XString m_file_name;
-
-    cv::Mat m_image;            // full image loaded into 2d array
 
 	// Standard tags (virtually all photos have these)
 	int m_width;
@@ -91,7 +95,7 @@ private:
 	// Multi-band fields
 	XString m_band_name;
 	int m_band_index;
-	//m_capture_uuid;
+    XString m_capture_uuid;
 
 	// Multi-spectral fields
 	double m_fnumber;

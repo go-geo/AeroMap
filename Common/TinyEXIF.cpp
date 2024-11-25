@@ -1092,7 +1092,7 @@ namespace TinyEXIF {
 				case 1: value = strtod(values.front().c_str(), NULL); return true;
 				case 2: value = strtod(values.front().c_str(), NULL) / strtod(values.back().c_str(), NULL); return true;
 				}
-				return false;
+				return true;
 			}
 			// same as previous function but with unsigned int results
 			static bool Value(const TinyXML2::XMLElement* document, const char* name, uint32_t& value) {
@@ -1103,7 +1103,20 @@ namespace TinyEXIF {
 						return false;
 				}
 				value = strtoul(szAttribute, NULL, 0); return true;
-				return false;
+				return true;
+			}
+			// same as previous function but with std::string result
+			static bool Value(const TinyXML2::XMLElement* document, const char* name, std::string& value)
+			{
+				const char* szAttribute = document->Attribute(name);
+				if (szAttribute == NULL)
+				{
+					const TinyXML2::XMLElement* const element(document->FirstChildElement(name));
+					if (element == NULL || (szAttribute = element->GetText()) == NULL)
+						return false;
+				}
+				value = szAttribute;
+				return true;
 			}
 		};
 
@@ -1111,11 +1124,15 @@ namespace TinyEXIF {
 		// pix4d defined xmp tags
 		BandGain = 0.0;
 		ParseXMP::Value(document, "Camera:BandGain", BandGain);
+		CaptureUUID.clear();
+		std::string s;
+		if (ParseXMP::Value(document, "Camera:CaptureUUID", s))
+			CaptureUUID = s;
 
 		ParseXMP::Value(document, "Camera:Roll", GeoLocation.RollDegree);
 		ParseXMP::Value(document, "Camera:Pitch", GeoLocation.PitchDegree);
 		ParseXMP::Value(document, "Camera:Yaw", GeoLocation.YawDegree);
-			
+
 		// look for band name - would like to find a more general way of finding these but
 		// my xml isn't that strong
 
@@ -1247,7 +1264,8 @@ namespace TinyEXIF {
 		return PoseRollDegrees != DBL_MAX;
 	}
 
-	void EXIFInfo::clear() {
+	void EXIFInfo::clear()
+	{
 		Fields = FIELD_NA;
 
 		// Strings
@@ -1261,6 +1279,7 @@ namespace TinyEXIF {
 		DateTimeDigitized = "";
 		SubSecTimeOriginal = "";
 		Copyright = "";
+		CaptureUUID = "";
 
 		// Shorts / unsigned / double
 		ImageWidth = 0;

@@ -12,6 +12,7 @@ public:
     static double compute_irradiance(Photo* photo, bool use_sun_sensor = true);
     static XString get_primary_band_name(std::vector<Reconstruction::MultiType> multi_camera, XString user_band_name);
     static VEC3 vignette_map(Photo* photo);
+    static void compute_band_maps(std::vector<Reconstruction::MultiType> multi_camera, XString primary_band);
 };
 
 #endif // #ifndef MULTISPECTRAL_H

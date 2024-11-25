@@ -250,6 +250,7 @@ namespace TinyEXIF {
 		std::string BandName;
 		double BandGain;					// from Camera:BandGain element of <rdf:Description> tag
 		double GainAdjustment;				// from "drone-dji:SensorGainAdjustment"
+		std::string CaptureUUID;
 
 		struct TINYEXIF_LIB Calibration_t { // Camera calibration information
 			double FocalLength;             // Focal length (pixels)

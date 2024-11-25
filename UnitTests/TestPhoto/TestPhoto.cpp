@@ -190,6 +190,8 @@ TEST(Photo, Multi)
 
 		XString capture_date = photo.GetCaptureDate();
 		CHECK(capture_date == "2018:05:18 13:08:57");
+		XString uuid = photo.get_capture_id();
+		CHECK(uuid == "0900EB3C0598921532B04A6C40340E0C");
 
 		XString camera_str_osfm = photo.GetCameraStr(true);
 		XString camera_str_odm = photo.GetCameraStr(false);

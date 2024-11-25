@@ -5,6 +5,7 @@
 #include "Gsd.h"
 #include "Multispectral.h"
 #include "TextFile.h"
+#include "Thermal.h"
 #include "StageSFM.h"
 
 int StageSFM::Run()
@@ -55,12 +56,22 @@ int StageSFM::Run()
 	if (GetProject().GetReconstruction()->is_multi())
 	{
 		Photo* largest_photo = Photo::find_largest_photo(GetProject().GetImageList());
-		//undistort_pipeline.append(resize_thermal_images)
+		for (Photo* p : GetProject().GetImageList())
+		{
+			if (p->is_thermal())
+				Thermal::resize_to_match(p, largest_photo);
+		}
 	}
 
 	if (arg.radiometric_calibration != "none")
 	{
-		//	undistort_pipeline.append(radiometric_calibrate)
+		for (Photo* p : GetProject().GetImageList())
+		{
+			//if (p->is_thermal())
+			//	thermal.dn_to_temperature(photo, image, tree.dataset_raw)
+			//else
+			//	multispectral.dn_to_reflectance(photo, image, use_sun_sensor = args.radiometric_calibration == "camera+sun")
+		}
 	}
 
 	if (GetProject().GetReconstruction()->is_multi())

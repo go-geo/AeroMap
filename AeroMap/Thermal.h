@@ -7,7 +7,7 @@ class Thermal
 {
 public:
 
-	static Photo* resize_to_match(Photo* image, Photo* match_photo = nullptr);
+	static Photo* resize_to_match(Photo* photo, Photo* match_photo = nullptr);
 	static Photo* dn_to_temperature(Photo* photo, Photo* image, XString images_path);
 };
 

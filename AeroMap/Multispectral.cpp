@@ -8,33 +8,33 @@
 
 Photo* Multispectral::dn_to_radiance(Photo* photo)
 {
-//odm had separate photo & image - we have both inside photo object
-// 
-	// Convert Digital Number values to Radiance values
+	//odm had separate photo & image - we have both inside photo object
 	// 
-	// Inputs:
-	//		photo
-	// Outputs:
-	//		return = photo with radiance image values
-	//
-	
-	//    image = image.astype("float32")
-	//    if len(image.shape) != 3:
-	//        raise ValueError("Image should have shape length of 3 (got: %s)" % len(image.shape))
-	
-	// Thermal (this should never happen, but just in case..)
+		// Convert Digital Number values to Radiance values
+		// 
+		// Inputs:
+		//		photo
+		// Outputs:
+		//		return = photo with radiance image values
+		//
+
+		//    image = image.astype("float32")
+		//    if len(image.shape) != 3:
+		//        raise ValueError("Image should have shape length of 3 (got: %s)" % len(image.shape))
+
+		// Thermal (this should never happen, but just in case..)
 	if (photo->is_thermal())
 		return photo;
 
 	// All others
 	//    a1, a2, a3 = photo.get_radiometric_calibration()
 	//    dark_level = photo.get_dark_level()
-	
+
 	double exposure_time = photo->GetExposureTime();
 	double gain = photo->GetGain();
 	double gain_adjustment = photo->GetGainAdjustment();
 	double photometric_exp = photo->GetPhotometricExposure();
-	
+
 	//    if a1 is None and photometric_exp is None:
 	//        log.ODM_WARNING("Cannot perform radiometric calibration, no FNumber/Exposure Time or Radiometric Calibration EXIF tags found in %s. Using Digital Number." % photo.filename)
 	//        return image
@@ -116,7 +116,7 @@ VEC3 Multispectral::vignette_map(Photo* photo)
 //            vignette = 1.0 / vignette
 //
 //        return vignette, x, y
-}
+	}
 
 	return VEC3(0, 0, 0);
 }
@@ -139,7 +139,7 @@ double Multispectral::compute_irradiance(Photo* photo, bool use_sun_sensor)
 
 	// TODO: support for calibration panels
 
-    //if (use_sun_sensor && photo->get_sun_sensor())
+	//if (use_sun_sensor && photo->get_sun_sensor())
 	{
 		//        # Estimate it
 		//        dls_orientation_vector = np.array([0,0,-1])
@@ -168,7 +168,7 @@ double Multispectral::compute_irradiance(Photo* photo, bool use_sun_sensor)
 		//        horizontal_irradiance = direct_irradiance * np.sin(solar_elevation) + scattered_irradiance
 		//        return horizontal_irradiance
 	}
-    //else if (use_sun_sensor)
+	//else if (use_sun_sensor)
 	{
 		//        log.ODM_WARNING("No sun sensor values found for %s" % photo.filename)
 	}
@@ -217,89 +217,101 @@ XString Multispectral::get_primary_band_name(std::vector<Reconstruction::MultiTy
 	return band_name;
 }
 
-//def compute_band_maps(multi_camera, primary_band):
-//    """
-//    Computes maps of:
-//     - { photo filename --> associated primary band photo } (s2p)
-//     - { primary band filename --> list of associated secondary band photos } (p2s)
-//    by looking at capture UUID, capture time or filenames as a fallback
-//    """
-//    band_name = get_primary_band_name(multi_camera, primary_band)
-//    primary_band_photos = None
-//    for band in multi_camera:
-//        if band['name'] == band_name:
-//            primary_band_photos = band['photos']
-//            break
-//
-//    # Try using capture time as the grouping factor
-//    try:
-//        unique_id_map = {}
-//        s2p = {}
-//        p2s = {}
-//
-//        for p in primary_band_photos:
-//            uuid = p.get_capture_id()
-//            if uuid is None:
-//                raise Exception("Cannot use capture time (no information in %s)" % p.filename)
-//
-//            # Should be unique across primary band
-//            if unique_id_map.get(uuid) is not None:
-//                raise Exception("Unreliable UUID/capture time detected (duplicate)")
-//
-//            unique_id_map[uuid] = p
-//
-//        for band in multi_camera:
-//            photos = band['photos']
-//
-//            for p in photos:
-//                uuid = p.get_capture_id()
-//                if uuid is None:
-//                    raise Exception("Cannot use UUID/capture time (no information in %s)" % p.filename)
-//
-//                # Should match the primary band
-//                if unique_id_map.get(uuid) is None:
-//                    raise Exception("Unreliable UUID/capture time detected (no primary band match)")
-//
-//                s2p[p.filename] = unique_id_map[uuid]
-//
-//                if band['name'] != band_name:
-//                    p2s.setdefault(unique_id_map[uuid].filename, []).append(p)
-//
-//        return s2p, p2s
-//    except Exception as e:
-//        # Fallback on filename conventions
-//        log.ODM_WARNING("%s, will use filenames instead" % str(e))
-//
-//        filename_map = {}
-//        s2p = {}
-//        p2s = {}
-//        file_regex = re.compile(r"^(.+)[-_]\w+(\.[A-Za-z]{3,4})$")
-//
-//        for p in primary_band_photos:
-//            filename_without_band = re.sub(file_regex, "\\1\\2", p.filename)
-//
-//            # Quick check
-//            if filename_without_band == p.filename:
-//                raise Exception("Cannot match bands by filename on %s, make sure to name your files [filename]_band[.ext] uniformly." % p.filename)
-//
-//            filename_map[filename_without_band] = p
-//
-//        for band in multi_camera:
-//            photos = band['photos']
-//
-//            for p in photos:
-//                filename_without_band = re.sub(file_regex, "\\1\\2", p.filename)
-//
-//                # Quick check
-//                if filename_without_band == p.filename:
-//                    raise Exception("Cannot match bands by filename on %s, make sure to name your files [filename]_band[.ext] uniformly." % p.filename)
-//
-//                s2p[p.filename] = filename_map[filename_without_band]
-//
-//                if band['name'] != band_name:
-//                    p2s.setdefault(filename_map[filename_without_band].filename, []).append(p)
-//
-//        return s2p, p2s
+void Multispectral::compute_band_maps(std::vector<Reconstruction::MultiType> multi_camera, XString primary_band)
+{
+	// Computes maps of:
+	//     - { photo filename --> associated primary band photo } (s2p)
+	//     - { primary band filename --> list of associated secondary band photos } (p2s)
+	// by looking at capture UUID, capture time or filenames as a fallback
+	//
+
+	XString band_name = get_primary_band_name(multi_camera, primary_band);
+	//primary_band_photos = None
+	for (auto band : multi_camera)
+	{
+		//if band['name'] == band_name:
+		//    primary_band_photos = band['photos']
+		//    break
+	}
+
+	// Try using capture time as the grouping factor
+	//try:
+	//    unique_id_map = {}
+	//    s2p = {}
+	//    p2s = {}
+
+	//for p in primary_band_photos:
+	{
+		//uuid = p.get_capture_id()
+		//if uuid is None:
+		//    raise Exception("Cannot use capture time (no information in %s)" % p.filename)
+
+		//# Should be unique across primary band
+		//if unique_id_map.get(uuid) is not None:
+		//    raise Exception("Unreliable UUID/capture time detected (duplicate)")
+
+		//unique_id_map[uuid] = p
+	}
+
+	for (auto band : multi_camera)
+	{
+		//        photos = band['photos']
+		//        for p in photos:
+		{
+			//            uuid = p.get_capture_id()
+			//            if uuid is None:
+			//                raise Exception("Cannot use UUID/capture time (no information in %s)" % p.filename)
+
+			//            # Should match the primary band
+			//            if unique_id_map.get(uuid) is None:
+			//                raise Exception("Unreliable UUID/capture time detected (no primary band match)")
+
+			//            s2p[p.filename] = unique_id_map[uuid]
+
+			//            if band['name'] != band_name:
+			//                p2s.setdefault(unique_id_map[uuid].filename, []).append(p)
+		}
+	}
+	//    return s2p, p2s
+	//except Exception as e:
+	//    # Fallback on filename conventions
+	//    log.ODM_WARNING("%s, will use filenames instead" % str(e))
+
+	//    filename_map = {}
+	//    s2p = {}
+	//    p2s = {}
+	//    file_regex = re.compile(r"^(.+)[-_]\w+(\.[A-Za-z]{3,4})$")
+
+	//for p in primary_band_photos:
+	{
+        //filename_without_band = re.sub(file_regex, "\\1\\2", p.filename)
+
+        //# Quick check
+        //if filename_without_band == p.filename:
+        //    raise Exception("Cannot match bands by filename on %s, make sure to name your files [filename]_band[.ext] uniformly." % p.filename)
+
+        //filename_map[filename_without_band] = p
+	}
+
+	for (auto band : multi_camera)
+	{
+        //photos = band['photos']
+
+        //for p in photos:
+        //    filename_without_band = re.sub(file_regex, "\\1\\2", p.filename)
+
+        //    # Quick check
+        //    if filename_without_band == p.filename:
+        //        raise Exception("Cannot match bands by filename on %s, make sure to name your files [filename]_band[.ext] uniformly." % p.filename)
+
+        //    s2p[p.filename] = filename_map[filename_without_band]
+
+        //    if band['name'] != band_name:
+        //        p2s.setdefault(filename_map[filename_without_band].filename, []).append(p)
+	}
+
+	//    return s2p, p2s
+}
 
 //def compute_alignment_matrices(multi_camera, primary_band_name, images_path, s2p, p2s, max_concurrency=1, max_samples=30):
 //    log.ODM_INFO("Computing band alignment")
