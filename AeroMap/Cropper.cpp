@@ -78,11 +78,11 @@ XString Cropper::crop(XString gpkg_path, XString geotiff_path, bool keep_origina
 	args.push_back("35.4%");							// TODO: get_max_memory()
 	AeroLib::RunProgram(tree.prog_gdal_warp, args);
 	// cmd: gdalwarp 
-	//			-cutline "d:\test_odm\odm_georeferencing\odm_georeferenced_model.bounds.gpkg" 
+	//			-cutline "d:\test\odm_georeferencing\odm_georeferenced_model.bounds.gpkg" 
 	//			-crop_to_cutline 
 	//			-co TILED=YES -co COMPRESS=DEFLATE -co BLOCKXSIZE=512 -co BLOCKYSIZE=512 -co BIGTIFF=IF_SAFER -co NUM_THREADS=16
-	//			"d:\test_odm\odm_dem\dsm.original.tif" 
-	//			"d:\test_odm\odm_dem\dsm.tif" 
+	//			"d:\test\odm_dem\dsm.original.tif" 
+	//			"d:\test\odm_dem\dsm.tif" 
 	//			--config GDAL_CACHEMAX 35.4%
 
 	if (keep_original == false)
@@ -203,8 +203,8 @@ XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_dista
 	//        "decimation "
 	//        "--filters.decimation.step={} ".format(pointcloud_path, decimated_pointcloud_path, decimation_step))
 	// cmd: pdal translate 
-	//			-i "d:\test_odm\odm_georeferencing\odm_georeferenced_model.laz" 
-	//			-o "d:\test_odm\odm_georeferencing\odm_georeferenced_model.decimated.las" 
+	//			-i "d:\test\odm_georeferencing\odm_georeferenced_model.laz" 
+	//			-o "d:\test\odm_georeferencing\odm_georeferenced_model.decimated.las" 
 	//			decimation 
 	//			--filters.decimation.step=40 
 
@@ -227,7 +227,7 @@ XString Cropper::create_bounds_geojson(XString pointcloud_path, int buffer_dista
 	args.push_back(decimated_pointcloud_path.c_str());
 	AeroLib::RunProgram(tree.prog_pdal, args, boundary_file_path);
 	// cmd: pdal info --boundary --filters.hexbin.edge_size=1 --filters.hexbin.threshold=0 
-	//			"d:\test_odm\odm_georeferencing\odm_georeferenced_model.decimated.las" > "d:\test_odm\odm_georeferencing\odm_georeferenced_model.boundary.json"
+	//			"d:\test\odm_georeferencing\odm_georeferenced_model.decimated.las" > "d:\test\odm_georeferencing\odm_georeferenced_model.boundary.json"
 
 	json pc_geojson_boundary_feature = nullptr;
 

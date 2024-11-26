@@ -154,8 +154,8 @@ int StageGeoref::Run()
 
 			// original command:
 			// pdal translate 
-			//          -i "d:\test_odm\odm_filterpoints\point_cloud.ply" 
-			//          -o "d:\test_odm\odm_georeferencing\odm_georeferenced_model.laz"
+			//          -i "d:\test\odm_filterpoints\point_cloud.ply" 
+			//          -o "d:\test\odm_georeferencing\odm_georeferenced_model.laz"
 			//          ferry transformation 
 			//          --filters.ferry.dimensions="views => UserData"  
 			//          --filters.transformation.matrix="1 0 0 322263.0 0 1 0 5157982.0 0 0 1 0 0 0 0 1" 

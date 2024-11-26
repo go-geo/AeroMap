@@ -56,9 +56,9 @@ void PointCloud::filter(XString input_point_cloud, XString output_point_cloud, X
 	}
 	AeroLib::RunProgram(tree.prog_filter, args);
 	// cmd: "C:\ODM-3.2.0\SuperBuild\install\bin\FPCFilter"
-	//			--input "d:\test_odm\opensfm\undistorted\openmvs\scene_dense_dense_filtered.ply"
-	//			--output "d:\test_odm\odm_filterpoints\point_cloud.ply" 
-	//			--stats "d:\test_odm\odm_filterpoints\point_cloud_stats.json"
+	//			--input "d:\test\opensfm\undistorted\openmvs\scene_dense_dense_filtered.ply"
+	//			--output "d:\test\odm_filterpoints\point_cloud.ply" 
+	//			--stats "d:\test\odm_filterpoints\point_cloud_stats.json"
 	//			--concurrency 16 --meank 16 --std 2.5 
 
 	if (AeroLib::FileExists(output_point_cloud) == false)

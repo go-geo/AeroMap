@@ -10,7 +10,9 @@
 *.exe.recipe
 *.iobj
 *.ipdb
-		
+
+AeroMap/Debug/
+AeroMap/Release/
 AeroMap.tlog/
 AeroMap/x64/
 AeroMap/Data/AeroMap.log
@@ -21,6 +23,7 @@ Lib/jpeg-9a/x64/
 Lib/libpng-1.6.20/x64/
 Lib/pdal-2.3/x64/
 Lib/proj-7.1.1/build_vs14_x64/src/x64/
+
 Lib/tiff-4.7.0/Debug/
 Lib/tiff-4.7.0/Release/
 Lib/tiff-4.7.0/libtiff/Debug/
@@ -33,6 +36,8 @@ Lib/tiff-4.7.0/tiff_mkg3states.dir/
 Lib/tiff-4.7.0/tiffxx.dir/
 Lib/tiff-4.7.0/tools/Debug/
 Lib/tiff-4.7.0/tools/Release/
+Lib/tiff-4.7.0/libtiff/tiff.dir/
+
 Lib/zlib/x64/
 
 gdal.lib
@@ -40,6 +45,7 @@ pdal.lib
 proj.lib
 proj_d.lib
 
+UnitTests/TestGcpFile/x64/
 UnitTests/TestLibTiff/x64/
 UnitTests/TestPhoto/x64/
 UnitTests/TestProj/x64/

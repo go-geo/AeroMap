@@ -1,8 +1,1 @@
-﻿  Shots.cpp
-  Logger.cpp
-  TestShots.cpp
-  Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 74 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  TestShots.vcxproj -> C:\AeroMap\UnitTests\TestShots\x64\Release\TestShots.exe
+﻿

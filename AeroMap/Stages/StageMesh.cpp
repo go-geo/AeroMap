@@ -22,8 +22,8 @@ int StageMesh::Run()
 
 	AeroLib::CreateFolder(tree.mesh_path);
 
-	CreateMesh3D();
 	CreateMesh25D();
+	CreateMesh3D();
 
 	BenchmarkStop();
 
@@ -39,7 +39,7 @@ int StageMesh::CreateMesh3D()
 	{
 		if ((AeroLib::FileExists(tree.mesh) == false) || Rerun())
 		{
-			//		Logger::Write(__FUNCTION__, "Writing ODM Mesh file in: %s' % tree.odm_mesh)
+			GetApp()->LogWrite("Writing 3D mesh file: '%s'", tree.mesh.c_str());
 
 			Mesh::screened_poisson_reconstruction(
 				tree.filtered_point_cloud, 
@@ -68,7 +68,7 @@ int StageMesh::CreateMesh25D()
 	{
 		if ((AeroLib::FileExists(tree.mesh_25d) == false) || Rerun())
 		{
-			Logger::Write(__FUNCTION__, "Writing 2.5D mesh file: '%s'", tree.mesh_25d.c_str());
+			GetApp()->LogWrite("Writing 2.5D mesh file: '%s'", tree.mesh_25d.c_str());
 
 			double multiplier = PI / 2.0;
 			std::vector<double> radius_steps = DEM::get_dem_radius_steps(tree.filtered_point_cloud_stats, 3, arg.ortho_resolution, multiplier);

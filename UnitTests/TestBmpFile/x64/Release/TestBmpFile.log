@@ -1,8 +1,1 @@
-﻿  BmpFile.cpp
-  Logger.cpp
-  TestBmpFile.cpp
-  Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 139 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  TestBmpFile.vcxproj -> C:\AeroMap\UnitTests\TestBmpFile\x64\Release\TestBmpFile.exe
+﻿

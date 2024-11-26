@@ -14,6 +14,8 @@ void DEM::create_dem(
 {
 	// Create DEM from multiple radii, and optionally gapfill.
 	//
+	// Called from: StageDEM, Mesh
+	//
 
 	AeroLib::CreateFolder(outdir);
 
@@ -217,9 +219,6 @@ void DEM::create_dem(
 	//    'geotiff_small_filled': geotiff_small_filled_path
 	//}
 
-//TODO:
-//working on a number of problems here
-	gapfill = false;
 	if (gapfill)
 	{
 		// Sometimes gdal_fillnodata.py behaves strangely 
@@ -241,8 +240,8 @@ void DEM::create_dem(
 		AeroLib::RunProgram(tree.prog_gdal_translate, args);
 		// cmd: gdal_translate 
 		//			-co NUM_THREADS=16 -co BIGTIFF=IF_SAFER --config GDAL_CACHEMAX 34.85%
-		//          "d:\test_odm\odm_meshing\tmp\tiles.vrt" 
-		//          "d:\test_odm\odm_meshing\tmp\tiles.tmp.tif"
+		//          "d:\test\odm_meshing\tmp\tiles.vrt" 
+		//          "d:\test\odm_meshing\tmp\tiles.tmp.tif"
 
 		// Scale to 10% size
 		args.clear();
@@ -264,18 +263,11 @@ void DEM::create_dem(
 		AeroLib::RunProgram(tree.prog_gdal_translate, args);
 		// cmd: gdal_translate -co NUM_THREADS=16 -co BIGTIFF=IF_SAFER --config GDAL_CACHEMAX 34.85% 
 		//          -outsize 10% 0 
-		//          "d:\test_odm\odm_meshing\tmp\tiles.tmp.tif" 
-		//          "d:\test_odm\odm_meshing\tmp\tiles.small.tif"
+		//          "d:\test\odm_meshing\tmp\tiles.tmp.tif" 
+		//          "d:\test\odm_meshing\tmp\tiles.small.tif"
 
 		// Fill scaled
 		gdal_fillnodata(1, "GTiff", geotiff_small_path, geotiff_small_filled_path);
-		//    gdal_fillnodata(['.',
-		//                    '-co', 'NUM_THREADS=%s' % kwargs['threads'],
-		//                    '-co', 'BIGTIFF=IF_SAFER',
-		//                    '--config', 'GDAL_CACHE_MAX', str(kwargs['max_memory']) + '%',
-		//                    '-b', '1',
-		//                    '-of', 'GTiff',
-		//                    kwargs['geotiff_small'], kwargs['geotiff_small_filled']])
 
 		// Merge filled scaled DEM with unfilled DEM using bilinear interpolation
 		args.clear();
@@ -287,12 +279,12 @@ void DEM::create_dem(
 		args.push_back(geotiff_small_filled_path.c_str());
 		args.push_back(geotiff_tmp_path.c_str());
 		AeroLib::RunProgram(tree.prog_gdal_buildvrt, args);
-		//    run('gdalbuildvrt -resolution highest -r bilinear "%s" "%s" "%s"' % (merged_vrt_path, geotiff_small_filled_path, geotiff_tmp_path))
 		// cmd: gdalbuildvrt 
 		//          -resolution highest -r bilinear 
-		//          "d:\test_odm\odm_meshing\tmp\merged.vrt" 
-		//          "d:\test_odm\odm_meshing\tmp\tiles.small_filled.tif" 
-		//          "d:\test_odm\odm_meshing\tmp\tiles.tmp.tif"
+		//          "d:\test\odm_meshing\tmp\merged.vrt" 
+		//          "d:\test\odm_meshing\tmp\tiles.small_filled.tif" 
+		//          "d:\test\odm_meshing\tmp\tiles.tmp.tif"
+
 		args.clear();
 		args.push_back("-co");
 		if (max_workers > 0)
@@ -314,15 +306,8 @@ void DEM::create_dem(
 		// cmd: gdal_translate 
 		//          -co NUM_THREADS=16 -co TILED=YES -co BIGTIFF=IF_SAFER -co COMPRESS=DEFLATE
 		//          --config GDAL_CACHEMAX 34.85% 
-		//          "d:\test_odm\odm_meshing\tmp\merged.vrt" 
-		//          "d:\test_odm\odm_meshing\tmp\tiles.tif"
-		//    run('gdal_translate '
-		//        '-co NUM_THREADS={threads} '
-		//        '-co TILED=YES '
-		//        '-co BIGTIFF=IF_SAFER '
-		//        '-co COMPRESS=DEFLATE '
-		//        '--config GDAL_CACHEMAX {max_memory}% '
-		//        '"{merged_vrt}" "{geotiff}"'.format(**kwargs))
+		//          "d:\test\odm_meshing\tmp\merged.vrt" 
+		//          "d:\test\odm_meshing\tmp\tiles.tif"
 	}
 	else
 	{
@@ -383,12 +368,10 @@ std::vector<double> DEM::get_dem_radius_steps(XString stats_file, int steps, dou
 	std::vector<double> radius_steps;
 
 	double spacing = PointCloud::get_spacing(stats_file, resolution);
+
 	radius_steps.push_back(spacing * multiplier);
-	//    radius_steps = [point_cloud.get_spacing(stats_file, resolution) * multiplier]
 	for (int i = 1; i < steps; ++i)
 		radius_steps.push_back(radius_steps[i - 1] * sqrt(2.0));
-	//    for _ in range(steps - 1):
-	//        radius_steps.append(radius_steps[-1] * math.sqrt(2))
 
 	return radius_steps;
 }
@@ -621,12 +604,11 @@ int DEM::gdal_fillnodata(int src_band, XString out_format, XString src_filename,
 
 	// Create output file
 
-	// example of how to pass create options
 	char** pszOptions = nullptr;
-	pszOptions = CSLSetNameValue(pszOptions, "NUM_THREADS", "16");      //TODO:
 	pszOptions = CSLSetNameValue(pszOptions, "BIGTIFF", "IF_SAFER");
 
-	GDALDataset* dst_ds = pDriver->Create(dst_filename, src_ds->GetRasterXSize(), src_ds->GetRasterYSize(), 1, srcband->GetRasterDataType(), pszOptions);
+	// params are: output filename, source dataset, strict flag, options
+	GDALDataset* dst_ds = pDriver->CreateCopy(dst_filename.c_str(), src_ds, 1, pszOptions, nullptr, nullptr);
 	if (dst_ds == nullptr)
 	{
 		status = -1;
@@ -634,69 +616,9 @@ int DEM::gdal_fillnodata(int src_band, XString out_format, XString src_filename,
 	}
 	else
 	{
-		XString wkt = src_ds->GetProjectionRef();
-		if (wkt.GetLength() > 0)
-			dst_ds->SetProjection(wkt);
-
-		double geoTransform[6] = { 0.0 };
-		CPLErr err = src_ds->GetGeoTransform(geoTransform);
-		if (err == CPLErr::CE_None)
-			dst_ds->SetGeoTransform(geoTransform);
-
 		GDALRasterBand* dstband = dst_ds->GetRasterBand(1);
 
-		int buf_type = srcband->GetRasterDataType();
-		assert(buf_type == GDT_Float32);
-
-		int block_sizex = 0;
-		int block_sizey = 0;
-		srcband->GetBlockSize(&block_sizex, &block_sizey);
-		int block_countx = (srcband->GetXSize() + block_sizex - 1) / block_sizex;
-		int block_county = (srcband->GetYSize() + block_sizey - 1) / block_sizey;
-
-//TODO:
-// not working at all
-// 
-		// copy srcband to destband
-		float* pData = (float*)CPLMalloc(block_sizex * block_sizey);
-		for (int iYBlock = 0; iYBlock < block_county; iYBlock++)
-		{
-			for (int iXBlock = 0; iXBlock < block_countx; iXBlock++)
-			{
-				CPLErr err = srcband->ReadBlock(iXBlock, iYBlock, pData);
-				assert(err == CPLErr::CE_None);
-
-				// Compute the portion of the block that is valid
-				// for partial edge blocks.
-				//int validx = 0;
-				//int validy = 0;
-				//srcband->GetActualBlockSize(iXBlock, iYBlock, &validx, &validy);
-				//assert(validx == block_sizex);
-				//assert(validy == block_sizey);
-				//what if act size != block size?
-
-				err = dstband->WriteBlock(iXBlock, iYBlock, pData);
-				assert(err == CPLErr::CE_None);
-			}
-		}
-		//TODO:
-		// get heap corruption here - suggests not handling memory properly
-		//CPLFree(pData);
-
-		double ndv = srcband->GetNoDataValue();
-		dstband->SetNoDataValue(ndv);
-
-		GDALColorInterp color_interp = srcband->GetColorInterpretation();
-		dstband->SetColorInterpretation(color_interp);
-		if (color_interp == GDALColorInterp::GCI_PaletteIndex)
-		{
-			GDALColorTable* color_table = srcband->GetColorTable();
-			dstband->SetColorTable(color_table);
-		}
-
-		// Invoke algorithm.
-
-		err = GDALFillNodata(dstband, maskband, max_distance, 0, smoothing_iterations, nullptr, nullptr, nullptr);
+		CPLErr err = GDALFillNodata(dstband, maskband, max_distance, 0, smoothing_iterations, nullptr, nullptr, nullptr);
 		if (err != CPLErr::CE_None)
 		{
 			status = -1;

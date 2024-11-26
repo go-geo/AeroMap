@@ -1,9 +1,1 @@
-﻿  Calc.cpp
-  Logger.cpp
-  Gis.cpp
-  TestGis.cpp
-  Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 206 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  TestGis.vcxproj -> C:\AeroMap\UnitTests\TestGis\x64\Release\TestGis.exe
+﻿

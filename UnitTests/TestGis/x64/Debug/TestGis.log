@@ -1,9 +1,1 @@
-﻿  Calc.cpp
-  Logger.cpp
-  Gis.cpp
-  TestGis.cpp
-  Generating Code...
-  TestGis.vcxproj -> C:\AeroMap\UnitTests\TestGis\x64\Debug\TestGis.exe
-  Execute TestGis
-  C:\AeroMap\UnitTests\TestGis\x64\Debug\TestGis
-    ==> There were no test failures
+﻿
